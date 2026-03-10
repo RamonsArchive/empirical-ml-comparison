@@ -1,0 +1,37 @@
+======================================================================
+RESCUE EXPERIMENT - NEURAL_NETWORK RESULTS
+======================================================================
+
+--------------------------------------------------
+PERFORMANCE BY SPLIT (averaged over 3 trials)
+--------------------------------------------------
+
+Split      CV Train     CV Val       Test R2      Test RMSE    Test MAE    
+----------------------------------------------------------------------
+50_50      -0.0019      -0.6159      -8.2550      3.6128       2.9158      
+80_20      -0.0050      -6.9319      -0.2514      1.3396       1.2070      
+
+--------------------------------------------------
+BEST MODEL (lowest RMSE)
+--------------------------------------------------
+Split: 80_20
+Trial: 1
+
+Best Parameters:
+  model__alpha: 0.001
+  model__batch_size: auto
+  model__early_stopping: False
+  model__hidden_layer_sizes: (16,)
+  model__learning_rate_init: 0.001
+
+Test Metrics:
+  R2:   0.0000
+  RMSE: 0.8312
+  MAE:  0.7724
+
+--------------------------------------------------
+INTERPRETATION
+--------------------------------------------------
+Model Quality: POOR (R2 = 0.0000)
+The model explains 0.0% of variance in PeopleRescued.
+Average prediction error: +/- 0.772 people

@@ -1,0 +1,37 @@
+======================================================================
+RESCUE EXPERIMENT - RANDOM_FOREST RESULTS
+======================================================================
+
+--------------------------------------------------
+PERFORMANCE BY SPLIT (averaged over 3 trials)
+--------------------------------------------------
+
+Split      CV Train     CV Val       Test R2      Test RMSE    Test MAE    
+----------------------------------------------------------------------
+50_50      -1.1966      -2.7726      -1.0167      1.7160       1.4712      
+80_20      -0.6064      -2.4903      0.3053       1.4050       1.3760      
+
+--------------------------------------------------
+BEST MODEL (lowest RMSE)
+--------------------------------------------------
+Split: 80_20
+Trial: 2
+
+Best Parameters:
+  model__max_depth: 5
+  model__max_features: None
+  model__min_samples_leaf: 1
+  model__min_samples_split: 2
+  model__n_estimators: 100
+
+Test Metrics:
+  R2:   0.9159
+  RMSE: 0.2900
+  MAE:  0.2100
+
+--------------------------------------------------
+INTERPRETATION
+--------------------------------------------------
+Model Quality: EXCELLENT (R2 = 0.9159)
+The model explains 91.6% of variance in PeopleRescued.
+Average prediction error: +/- 0.210 people

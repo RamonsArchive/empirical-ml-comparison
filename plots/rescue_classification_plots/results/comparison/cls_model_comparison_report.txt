@@ -1,0 +1,75 @@
+================================================================================
+RESCUE CLASSIFICATION - MODEL COMPARISON SUMMARY
+================================================================================
+
+EXPERIMENT OVERVIEW
+--------------------------------------------------------------------------------
+Task:           Binary Classification (Helped vs Did Not Help)
+Design:         Within-subjects, counterbalanced across 3 conditions
+Modeled Data:   Conditions 1 (Single) & 2 (Multiple) only
+                Condition 0 (Empty) excluded - no victims by design
+Target:         Helped (PeopleRescued > 0 = 1, else 0)
+Predictors:     Age, Gender, Group, Condition, TimeElapsed, DrownCount,
+                TimeNearVictim, baseline_TimeElapsed, baseline_DrownCount
+CV Strategy:    Leave-One-Out Cross-Validation (LOOCV)
+Splits:         50_50, 80_20
+Trials:         3 per split with different random seeds
+
+--------------------------------------------------------------------------------
+NAIVE BASELINE (Majority Class Predictor)
+--------------------------------------------------------------------------------
+A model that always predicts class 0 achieves accuracy = 0.75
+Any useful model must achieve F1 and accuracy above this baseline.
+
+--------------------------------------------------------------------------------
+AVERAGE TEST F1 BY MODEL AND SPLIT (averaged over 3 trials)
+--------------------------------------------------------------------------------
+Model               50_50          80_20          Overall        
+--------------------------------------------------------------------------------
+boosting            0.0000         0.0000         0.0000
+random_forest       0.3333         0.3333         0.3333
+neural_network      0.5556         0.4444         0.5000
+
+--------------------------------------------------------------------------------
+AVERAGE TEST ACCURACY BY MODEL AND SPLIT (averaged over 3 trials)
+--------------------------------------------------------------------------------
+Model               50_50          80_20          Overall        
+--------------------------------------------------------------------------------
+boosting            0.7500         0.5000         0.6250
+random_forest       0.6667         0.6667         0.6667
+neural_network      0.8333         0.5000         0.6667
+
+--------------------------------------------------------------------------------
+AVERAGE TEST ROC-AUC BY MODEL AND SPLIT (averaged over 3 trials)
+--------------------------------------------------------------------------------
+Model               50_50          80_20          Overall        
+--------------------------------------------------------------------------------
+boosting            0.5000         0.5000         0.5000
+random_forest       0.4444         0.3333         0.3889
+neural_network      1.0000         0.6667         0.8333
+
+--------------------------------------------------------------------------------
+AVERAGE TEST PRECISION / RECALL BY MODEL AND SPLIT
+--------------------------------------------------------------------------------
+Model               P(50_50)   R(50_50)  P(80_20)   R(80_20)  
+--------------------------------------------------------------------------------
+boosting            0.0000     0.0000    0.0000     0.0000    
+random_forest       0.3333     0.3333    0.3333     0.3333    
+neural_network      0.5000     0.6667    0.3333     0.6667    
+
+--------------------------------------------------------------------------------
+INTERPRETATION
+--------------------------------------------------------------------------------
+At least one model achieved F1 > 0.50, indicating some
+discriminative ability between Helped and Not Helped classes.
+
+--------------------------------------------------------------------------------
+BEST SINGLE TRIAL (for reference only)
+--------------------------------------------------------------------------------
+Model:     random_forest
+Split:     50_50
+Accuracy:  1.0000
+Precision: 1.0000
+Recall:    1.0000
+F1:        1.0000
+ROC-AUC:   1.0000

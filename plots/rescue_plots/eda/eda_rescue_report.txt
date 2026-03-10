@@ -1,0 +1,67 @@
+======================================================================
+RESCUE EXPERIMENT - EXPLORATORY DATA ANALYSIS
+======================================================================
+
+Task: REGRESSION (Predict PeopleRescued from behavioral features)
+Design: Within-subjects, 3 trials per participant
+Hypothesis: Diffusion of responsibility in Multiple vs Single condition
+
+--------------------------------------------------
+DATASET OVERVIEW
+--------------------------------------------------
+Total rows: 15
+Participants: 5
+Trials per participant: 3
+Conditions: 0=Empty, 1=Single, 2=Multiple
+Groups: 0 (odd ID), 1 (even ID)
+Columns: ['ParticipantID', 'Age', 'Gender', 'Group', 'TrialNumber', 'Condition', 'TimeElapsed', 'PeopleRescued', 'DrownCount', 'TimeNearVictim']
+
+--------------------------------------------------
+DEMOGRAPHICS
+--------------------------------------------------
+Age: mean=20.6, range=[18, 24]
+  Female: 3 participants
+  Male: 2 participants
+
+--------------------------------------------------
+TARGET VARIABLE BY CONDITION
+--------------------------------------------------
+
+Condition 0 (Empty):
+  PeopleRescued: mean=0.000, std=0.000, range=[0, 0]
+  TimeNearVictim: mean=0.000
+  TimeElapsed: mean=108.321
+
+Condition 1 (Single):
+  PeopleRescued: mean=0.200, std=0.447, range=[0, 1]
+  TimeNearVictim: mean=0.061
+  TimeElapsed: mean=83.402
+
+Condition 2 (Multiple):
+  PeopleRescued: mean=2.000, std=2.000, range=[0, 4]
+  TimeNearVictim: mean=6.434
+  TimeElapsed: mean=139.199
+
+--------------------------------------------------
+NAIVE BASELINE PERFORMANCE
+--------------------------------------------------
+
+Mean Predictor (Conditions 1 & 2 only):
+  Mean PeopleRescued: 1.1000
+  RMSE: 1.5780
+  MAE:  1.3400
+  R2:   0.0000 (by definition)
+
+A good model should achieve RMSE < 1.58
+
+--------------------------------------------------
+FEATURE CORRELATIONS WITH PeopleRescued (Conditions 1 & 2)
+--------------------------------------------------
+  TimeElapsed: +0.6978
+  DrownCount: +0.6126
+  Condition: +0.5704
+  Age: -0.3119
+  TimeNearVictim: +0.2993
+  ParticipantID: -0.0816
+  TrialNumber: +0.0634
+  Group: -0.0517

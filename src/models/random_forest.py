@@ -78,6 +78,7 @@ def run_random_forest_experiment(
     random_state: int = 42,
     param_grid: dict | None = None,
     scoring: str | None = None,
+    cv_folds: int | object = 5,
 ):
     """
     Random Forest experiment:
@@ -151,10 +152,13 @@ def run_random_forest_experiment(
     # =========================
     # 4. Grid search (5-fold CV) on TRAIN ONLY
     # =========================
-    if problem_type == "classification":
-        cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=random_state)
+    if isinstance(cv_folds, int):
+        if problem_type == "classification":
+            cv = StratifiedKFold(n_splits=cv_folds, shuffle=True, random_state=random_state)
+        else:
+            cv = KFold(n_splits=cv_folds, shuffle=True, random_state=random_state)
     else:
-        cv = KFold(n_splits=5, shuffle=True, random_state=random_state)
+        cv = cv_folds  # Pre-built cv splitter (e.g. LeaveOneOut)
 
     # Calculate total combinations for logging
     total_combos = 1

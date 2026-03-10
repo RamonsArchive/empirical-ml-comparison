@@ -1,0 +1,54 @@
+================================================================================
+RESCUE EXPERIMENT - MODEL COMPARISON SUMMARY
+================================================================================
+
+EXPERIMENT OVERVIEW
+--------------------------------------------------------------------------------
+Task:           Regression (predict PeopleRescued from behavioral features)
+Design:         Within-subjects, counterbalanced across 3 conditions
+Modeled Data:   Conditions 1 (Single) & 2 (Multiple) only
+                Condition 0 (Empty) excluded - no victims by design
+Predictors:     Age, Gender, Group, Condition, TimeElapsed, DrownCount,
+                TimeNearVictim, baseline_TimeElapsed, baseline_DrownCount
+Target:         PeopleRescued (integer 0-4)
+Splits:         50_50, 80_20
+Trials:         3 per split with different random seeds
+
+--------------------------------------------------------------------------------
+NAIVE BASELINE (Mean Predictor)
+--------------------------------------------------------------------------------
+A model that always predicts the mean PeopleRescued.
+Any useful model must achieve RMSE below this and R2 above 0.
+
+--------------------------------------------------------------------------------
+AVERAGE TEST RMSE BY MODEL AND SPLIT (averaged over 3 trials)
+--------------------------------------------------------------------------------
+Model               50_50          80_20          Overall        
+--------------------------------------------------------------------------------
+boosting            1.7370         1.4306         1.5838
+random_forest       1.7160         1.4050         1.5605
+neural_network      3.6128         1.3396         2.4762
+
+--------------------------------------------------------------------------------
+AVERAGE TEST R2 BY MODEL AND SPLIT (averaged over 3 trials)
+--------------------------------------------------------------------------------
+Model               50_50          80_20          Overall        
+--------------------------------------------------------------------------------
+boosting            -1.0274        -0.0009        -0.5142
+random_forest       -1.0167        0.3053         -0.3557
+neural_network      -8.2550        -0.2514        -4.2532
+
+--------------------------------------------------------------------------------
+INTERPRETATION
+--------------------------------------------------------------------------------
+At least one model achieved positive R2, indicating predictive
+value above the naive mean predictor.
+
+--------------------------------------------------------------------------------
+BEST SINGLE TRIAL (for reference only)
+--------------------------------------------------------------------------------
+Model: random_forest
+Split: 80_20
+RMSE:  0.2900
+R2:    0.9159
+MAE:   0.2100

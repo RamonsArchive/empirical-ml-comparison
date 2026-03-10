@@ -1,0 +1,918 @@
+{
+  "boosting": {
+    "50_50": [
+      {
+        "trial": 0,
+        "best_params": {
+          "model__learning_rate": 0.05,
+          "model__max_depth": 3,
+          "model__n_estimators": 500,
+          "model__reg_lambda": 10,
+          "model__subsample": 0.8
+        },
+        "cv_train_score": -0.004595152707770467,
+        "cv_val_score": -0.5341444140296516,
+        "cv_scoring": "neg_mean_squared_error",
+        "test_metrics": {
+          "mse": 4.000287055969238,
+          "rmse": 2.000071762704838,
+          "mae": 1.4508627653121948,
+          "r2": -0.041741371154785156
+        },
+        "y_test": [
+          0,
+          0,
+          4,
+          4,
+          0
+        ],
+        "y_pred": [
+          0.9769962430000305,
+          -0.05440191924571991,
+          1.004381775856018,
+          0.8271048069000244,
+          -0.05440191924571991
+        ],
+        "feature_importances": [
+          0.7703313231468201,
+          0.0,
+          0.0,
+          0.22966866195201874,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "feature_names": [
+          "num__Age",
+          "num__Group",
+          "num__Condition",
+          "num__TimeElapsed",
+          "num__DrownCount",
+          "num__TimeNearVictim",
+          "num__baseline_TimeElapsed",
+          "num__baseline_DrownCount",
+          "cat__Gender_Female",
+          "cat__Gender_Male"
+        ]
+      },
+      {
+        "trial": 1,
+        "best_params": {
+          "model__learning_rate": 0.01,
+          "model__max_depth": 3,
+          "model__n_estimators": 50,
+          "model__reg_lambda": 100,
+          "model__subsample": 0.8
+        },
+        "cv_train_score": -3.10998740196228,
+        "cv_val_score": -5.284769654273987,
+        "cv_scoring": "neg_mean_squared_error",
+        "test_metrics": {
+          "mse": 2.582882881164551,
+          "rmse": 1.6071349915811524,
+          "mae": 1.4717482328414917,
+          "r2": -3.0357537269592285
+        },
+        "y_test": [
+          0,
+          2,
+          0,
+          0,
+          0
+        ],
+        "y_pred": [
+          1.7870347499847412,
+          1.819358468055725,
+          1.7870347499847412,
+          1.7901843786239624,
+          1.8138456344604492
+        ],
+        "feature_importances": [
+          0.2715311050415039,
+          0.0,
+          0.34878072142601013,
+          0.0,
+          0.0,
+          0.3796881437301636,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "feature_names": [
+          "num__Age",
+          "num__Group",
+          "num__Condition",
+          "num__TimeElapsed",
+          "num__DrownCount",
+          "num__TimeNearVictim",
+          "num__baseline_TimeElapsed",
+          "num__baseline_DrownCount",
+          "cat__Gender_Female",
+          "cat__Gender_Male"
+        ]
+      },
+      {
+        "trial": 2,
+        "best_params": {
+          "model__learning_rate": 0.1,
+          "model__max_depth": 3,
+          "model__n_estimators": 500,
+          "model__reg_lambda": 100,
+          "model__subsample": 1.0
+        },
+        "cv_train_score": -0.6721251167356967,
+        "cv_val_score": -2.95288627743721,
+        "cv_scoring": "neg_mean_squared_error",
+        "test_metrics": {
+          "mse": 2.571901798248291,
+          "rmse": 1.6037149990719333,
+          "mae": 1.3152506351470947,
+          "r2": -0.004649162292480469
+        },
+        "y_test": [
+          0,
+          0,
+          2,
+          4,
+          0
+        ],
+        "y_pred": [
+          2.1718268394470215,
+          2.1718268394470215,
+          2.1718268394470215,
+          2.1718268394470215,
+          0.2325998991727829
+        ],
+        "feature_importances": [
+          0.0034964338410645723,
+          0.0,
+          0.9965035915374756,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "feature_names": [
+          "num__Age",
+          "num__Group",
+          "num__Condition",
+          "num__TimeElapsed",
+          "num__DrownCount",
+          "num__TimeNearVictim",
+          "num__baseline_TimeElapsed",
+          "num__baseline_DrownCount",
+          "cat__Gender_Female",
+          "cat__Gender_Male"
+        ]
+      }
+    ],
+    "80_20": [
+      {
+        "trial": 0,
+        "best_params": {
+          "model__learning_rate": 0.05,
+          "model__max_depth": 3,
+          "model__n_estimators": 50,
+          "model__reg_lambda": 10,
+          "model__subsample": 1.0
+        },
+        "cv_train_score": -1.1154075860977173,
+        "cv_val_score": -2.5745618999004365,
+        "cv_scoring": "neg_mean_squared_error",
+        "test_metrics": {
+          "mse": 1.6863850355148315,
+          "rmse": 1.2986088847358281,
+          "mae": 1.2986088991165161,
+          "r2": 0.0
+        },
+        "y_test": [
+          0,
+          0
+        ],
+        "y_pred": [
+          1.2986088991165161,
+          1.2986088991165161
+        ],
+        "feature_importances": [
+          0.0,
+          0.0,
+          0.17355147004127502,
+          0.0,
+          0.0,
+          0.0,
+          0.8264485597610474,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "feature_names": [
+          "num__Age",
+          "num__Group",
+          "num__Condition",
+          "num__TimeElapsed",
+          "num__DrownCount",
+          "num__TimeNearVictim",
+          "num__baseline_TimeElapsed",
+          "num__baseline_DrownCount",
+          "cat__Gender_Female",
+          "cat__Gender_Male"
+        ]
+      },
+      {
+        "trial": 1,
+        "best_params": {
+          "model__learning_rate": 0.01,
+          "model__max_depth": 3,
+          "model__n_estimators": 50,
+          "model__reg_lambda": 100,
+          "model__subsample": 0.8
+        },
+        "cv_train_score": -2.7027537345886232,
+        "cv_val_score": -3.322791028022766,
+        "cv_scoring": "neg_mean_squared_error",
+        "test_metrics": {
+          "mse": 1.002758264541626,
+          "rmse": 1.001378182577205,
+          "mae": 0.9955235719680786,
+          "r2": -0.0027582645416259766
+        },
+        "y_test": [
+          0,
+          2
+        ],
+        "y_pred": [
+          1.1036485433578491,
+          1.112601399421692
+        ],
+        "feature_importances": [
+          0.2252785861492157,
+          0.0,
+          0.10953208804130554,
+          0.24504932761192322,
+          0.0,
+          0.10223685950040817,
+          0.3179031014442444,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "feature_names": [
+          "num__Age",
+          "num__Group",
+          "num__Condition",
+          "num__TimeElapsed",
+          "num__DrownCount",
+          "num__TimeNearVictim",
+          "num__baseline_TimeElapsed",
+          "num__baseline_DrownCount",
+          "cat__Gender_Female",
+          "cat__Gender_Male"
+        ]
+      },
+      {
+        "trial": 2,
+        "best_params": {
+          "model__learning_rate": 0.1,
+          "model__max_depth": 3,
+          "model__n_estimators": 500,
+          "model__reg_lambda": 100,
+          "model__subsample": 1.0
+        },
+        "cv_train_score": -0.38753454089164735,
+        "cv_val_score": -1.4903380215167998,
+        "cv_scoring": "neg_mean_squared_error",
+        "test_metrics": {
+          "mse": 3.966756582260132,
+          "rmse": 1.991671805860627,
+          "mae": 1.9916718006134033,
+          "r2": 0.0
+        },
+        "y_test": [
+          0,
+          0
+        ],
+        "y_pred": [
+          1.9916718006134033,
+          1.9916718006134033
+        ],
+        "feature_importances": [
+          0.00023344223154708743,
+          0.0,
+          0.9993310570716858,
+          0.0,
+          0.0,
+          0.0,
+          0.00043550602276809514,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "feature_names": [
+          "num__Age",
+          "num__Group",
+          "num__Condition",
+          "num__TimeElapsed",
+          "num__DrownCount",
+          "num__TimeNearVictim",
+          "num__baseline_TimeElapsed",
+          "num__baseline_DrownCount",
+          "cat__Gender_Female",
+          "cat__Gender_Male"
+        ]
+      }
+    ]
+  },
+  "random_forest": {
+    "50_50": [
+      {
+        "trial": 0,
+        "best_params": {
+          "model__max_depth": 5,
+          "model__max_features": null,
+          "model__min_samples_leaf": 1,
+          "model__min_samples_split": 2,
+          "model__n_estimators": 100
+        },
+        "cv_train_score": -0.11128999999999997,
+        "cv_val_score": -0.7623399999999999,
+        "cv_scoring": "neg_mean_squared_error",
+        "test_metrics": {
+          "mse": 4.0293600000000005,
+          "rmse": 2.0073265803052576,
+          "mae": 1.58,
+          "r2": -0.04931249999999987
+        },
+        "y_test": [
+          0,
+          0,
+          4,
+          4,
+          0
+        ],
+        "y_pred": [
+          0.9,
+          0.28,
+          1.12,
+          0.74,
+          0.58
+        ],
+        "feature_importances": [
+          0.3197004608294931,
+          0.04133064516129032,
+          0.021313364055299548,
+          0.14090501792114693,
+          0.0,
+          0.11359126984126981,
+          0.2931547619047619,
+          0.008192524321556576,
+          0.037746415770609325,
+          0.024065540194572452
+        ],
+        "feature_names": [
+          "Age",
+          "Group",
+          "Condition",
+          "TimeElapsed",
+          "DrownCount",
+          "TimeNearVictim",
+          "baseline_TimeElapsed",
+          "baseline_DrownCount",
+          "Gender_Female",
+          "Gender_Male"
+        ]
+      },
+      {
+        "trial": 1,
+        "best_params": {
+          "model__max_depth": 5,
+          "model__max_features": "sqrt",
+          "model__min_samples_leaf": 1,
+          "model__min_samples_split": 5,
+          "model__n_estimators": 100
+        },
+        "cv_train_score": -3.15472,
+        "cv_val_score": -5.228720000000001,
+        "cv_scoring": "neg_mean_squared_error",
+        "test_metrics": {
+          "mse": 2.6217619999999995,
+          "rmse": 1.6191855977620353,
+          "mae": 1.4835999999999998,
+          "r2": -3.096503124999998
+        },
+        "y_test": [
+          0,
+          2,
+          0,
+          0,
+          0
+        ],
+        "y_pred": [
+          1.8135,
+          1.8135,
+          1.791,
+          1.8135,
+          1.8135
+        ],
+        "feature_importances": [
+          0.0,
+          0.0,
+          0.0,
+          0.3333333333333333,
+          0.3333333333333333,
+          0.0,
+          0.3333333333333333,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "feature_names": [
+          "Age",
+          "Group",
+          "Condition",
+          "TimeElapsed",
+          "DrownCount",
+          "TimeNearVictim",
+          "baseline_TimeElapsed",
+          "baseline_DrownCount",
+          "Gender_Female",
+          "Gender_Male"
+        ]
+      },
+      {
+        "trial": 2,
+        "best_params": {
+          "model__max_depth": 5,
+          "model__max_features": null,
+          "model__min_samples_leaf": 1,
+          "model__min_samples_split": 2,
+          "model__n_estimators": 100
+        },
+        "cv_train_score": -0.3237,
+        "cv_val_score": -2.3268,
+        "cv_scoring": "neg_mean_squared_error",
+        "test_metrics": {
+          "mse": 2.31466,
+          "rmse": 1.5214006704349778,
+          "mae": 1.35,
+          "r2": 0.09583593749999997
+        },
+        "y_test": [
+          0,
+          0,
+          2,
+          4,
+          0
+        ],
+        "y_pred": [
+          1.46,
+          2.22,
+          2.24,
+          2.11,
+          0.94
+        ],
+        "feature_importances": [
+          0.13985670324375232,
+          0.02395814755365317,
+          0.1719484807524429,
+          0.23575812971880386,
+          0.0,
+          0.2609573025409423,
+          0.1281210986267166,
+          0.0,
+          0.025440652396338505,
+          0.013959485167350337
+        ],
+        "feature_names": [
+          "Age",
+          "Group",
+          "Condition",
+          "TimeElapsed",
+          "DrownCount",
+          "TimeNearVictim",
+          "baseline_TimeElapsed",
+          "baseline_DrownCount",
+          "Gender_Female",
+          "Gender_Male"
+        ]
+      }
+    ],
+    "80_20": [
+      {
+        "trial": 0,
+        "best_params": {
+          "model__max_depth": 5,
+          "model__max_features": null,
+          "model__min_samples_leaf": 2,
+          "model__min_samples_split": 2,
+          "model__n_estimators": 200
+        },
+        "cv_train_score": -1.0096857492016253,
+        "cv_val_score": -2.4132650861678,
+        "cv_scoring": "neg_mean_squared_error",
+        "test_metrics": {
+          "mse": 3.2149189618055556,
+          "rmse": 1.7930195095998134,
+          "mae": 1.7920416666666665,
+          "r2": 0.0
+        },
+        "y_test": [
+          0,
+          0
+        ],
+        "y_pred": [
+          1.85125,
+          1.7328333333333332
+        ],
+        "feature_importances": [
+          0.13910697468032415,
+          0.00510204081632653,
+          0.030612244897959183,
+          0.18934934404989934,
+          0.0,
+          0.08237799762106554,
+          0.5170173522425218,
+          0.020904984944797596,
+          0.01042701993077933,
+          0.00510204081632653
+        ],
+        "feature_names": [
+          "Age",
+          "Group",
+          "Condition",
+          "TimeElapsed",
+          "DrownCount",
+          "TimeNearVictim",
+          "baseline_TimeElapsed",
+          "baseline_DrownCount",
+          "Gender_Female",
+          "Gender_Male"
+        ]
+      },
+      {
+        "trial": 1,
+        "best_params": {
+          "model__max_depth": 5,
+          "model__max_features": null,
+          "model__min_samples_leaf": 1,
+          "model__min_samples_split": 2,
+          "model__n_estimators": 100
+        },
+        "cv_train_score": -0.5626357142857144,
+        "cv_val_score": -2.9285099999999997,
+        "cv_scoring": "neg_mean_squared_error",
+        "test_metrics": {
+          "mse": 0.08409999999999997,
+          "rmse": 0.2899999999999999,
+          "mae": 0.20999999999999996,
+          "r2": 0.9159
+        },
+        "y_test": [
+          0,
+          2
+        ],
+        "y_pred": [
+          0.01,
+          1.59
+        ],
+        "feature_importances": [
+          0.11542469257785704,
+          0.0005909549136162963,
+          0.12419169803480913,
+          0.2627156829235443,
+          0.07365179981439599,
+          0.09172187525607046,
+          0.3311874038769845,
+          0.0,
+          0.00022304003568640566,
+          0.0002928525670357829
+        ],
+        "feature_names": [
+          "Age",
+          "Group",
+          "Condition",
+          "TimeElapsed",
+          "DrownCount",
+          "TimeNearVictim",
+          "baseline_TimeElapsed",
+          "baseline_DrownCount",
+          "Gender_Female",
+          "Gender_Male"
+        ]
+      },
+      {
+        "trial": 2,
+        "best_params": {
+          "model__max_depth": 5,
+          "model__max_features": null,
+          "model__min_samples_leaf": 1,
+          "model__min_samples_split": 2,
+          "model__n_estimators": 500
+        },
+        "cv_train_score": -0.24677276190476194,
+        "cv_val_score": -2.1290536,
+        "cv_scoring": "neg_mean_squared_error",
+        "test_metrics": {
+          "mse": 4.54484,
+          "rmse": 2.131863035000138,
+          "mae": 2.126,
+          "r2": 0.0
+        },
+        "y_test": [
+          0,
+          0
+        ],
+        "y_pred": [
+          1.968,
+          2.284
+        ],
+        "feature_importances": [
+          0.03530203756595398,
+          0.005510638253516503,
+          0.30028528771298063,
+          0.15322711271788308,
+          0.04376082445855858,
+          0.3408279072292121,
+          0.11305054233806065,
+          0.0003148453872938273,
+          0.003392736094440919,
+          0.004328068242099816
+        ],
+        "feature_names": [
+          "Age",
+          "Group",
+          "Condition",
+          "TimeElapsed",
+          "DrownCount",
+          "TimeNearVictim",
+          "baseline_TimeElapsed",
+          "baseline_DrownCount",
+          "Gender_Female",
+          "Gender_Male"
+        ]
+      }
+    ]
+  },
+  "neural_network": {
+    "50_50": [
+      {
+        "trial": 0,
+        "best_params": {
+          "model__alpha": 0.01,
+          "model__batch_size": "auto",
+          "model__early_stopping": false,
+          "model__hidden_layer_sizes": [
+            32,
+            16
+          ],
+          "model__learning_rate_init": 0.01
+        },
+        "cv_train_score": -5.795259560729346e-06,
+        "cv_val_score": -0.08865732318680856,
+        "cv_scoring": "neg_mean_squared_error",
+        "test_metrics": {
+          "mse": 3.1878372313216814,
+          "rmse": 1.7854515482985478,
+          "mae": 1.462920934309227,
+          "r2": 0.16983405434331222
+        },
+        "y_test": [
+          0,
+          0,
+          4,
+          4,
+          0
+        ],
+        "y_pred": [
+          0.6379247941673638,
+          0.08261222397634249,
+          1.4359254387773173,
+          1.3405995367017165,
+          1.3705926288814625
+        ],
+        "training_info": {
+          "n_iter": 101,
+          "loss": 0.02138864752697491,
+          "n_layers": 4,
+          "n_outputs": 1,
+          "architecture": [
+            32,
+            16
+          ]
+        }
+      },
+      {
+        "trial": 1,
+        "best_params": {
+          "model__alpha": 0.01,
+          "model__batch_size": "auto",
+          "model__early_stopping": false,
+          "model__hidden_layer_sizes": [
+            16
+          ],
+          "model__learning_rate_init": 0.001
+        },
+        "cv_train_score": -0.003418927658515816,
+        "cv_val_score": -1.5222331609611355,
+        "cv_scoring": "neg_mean_squared_error",
+        "test_metrics": {
+          "mse": 0.9754402363661236,
+          "rmse": 0.9876437800979276,
+          "mae": 0.8419241343485965,
+          "r2": -0.5241253693220678
+        },
+        "y_test": [
+          0,
+          2,
+          0,
+          0,
+          0
+        ],
+        "y_pred": [
+          0.18965176605517203,
+          3.276927539939539,
+          -0.7598001422746055,
+          0.41422546291604584,
+          1.56901576055762
+        ],
+        "training_info": {
+          "n_iter": 309,
+          "loss": 0.021268202902669477,
+          "n_layers": 3,
+          "n_outputs": 1,
+          "architecture": [
+            16
+          ]
+        }
+      },
+      {
+        "trial": 2,
+        "best_params": {
+          "model__alpha": 0.001,
+          "model__batch_size": "auto",
+          "model__early_stopping": false,
+          "model__hidden_layer_sizes": [
+            32,
+            16
+          ],
+          "model__learning_rate_init": 0.05
+        },
+        "cv_train_score": -0.002293147188933098,
+        "cv_val_score": -0.23667870122711462,
+        "cv_scoring": "neg_mean_squared_error",
+        "test_metrics": {
+          "mse": 65.05154449685506,
+          "rmse": 8.065453768812704,
+          "mae": 6.442555081900155,
+          "r2": -24.41075956908401
+        },
+        "y_test": [
+          0,
+          0,
+          2,
+          4,
+          0
+        ],
+        "y_pred": [
+          1.2236166612075332,
+          13.521683181977762,
+          9.867071484576124,
+          12.859135131420736,
+          0.7412689503186134
+        ],
+        "training_info": {
+          "n_iter": 45,
+          "loss": 0.004962510029080073,
+          "n_layers": 4,
+          "n_outputs": 1,
+          "architecture": [
+            32,
+            16
+          ]
+        }
+      }
+    ],
+    "80_20": [
+      {
+        "trial": 0,
+        "best_params": {
+          "model__alpha": 0.001,
+          "model__batch_size": "auto",
+          "model__early_stopping": false,
+          "model__hidden_layer_sizes": [
+            16
+          ],
+          "model__learning_rate_init": 0.001
+        },
+        "cv_train_score": -0.006969943881785843,
+        "cv_val_score": -2.247867341084018,
+        "cv_scoring": "neg_mean_squared_error",
+        "test_metrics": {
+          "mse": 0.6909624176310855,
+          "rmse": 0.8312414917646288,
+          "mae": 0.7724054462314275,
+          "r2": 0.0
+        },
+        "y_test": [
+          0,
+          0
+        ],
+        "y_pred": [
+          1.0795735504725985,
+          0.4652373419902564
+        ],
+        "training_info": {
+          "n_iter": 415,
+          "loss": 0.007341779015124672,
+          "n_layers": 3,
+          "n_outputs": 1,
+          "architecture": [
+            16
+          ]
+        }
+      },
+      {
+        "trial": 1,
+        "best_params": {
+          "model__alpha": 0.01,
+          "model__batch_size": "auto",
+          "model__early_stopping": false,
+          "model__hidden_layer_sizes": [
+            16
+          ],
+          "model__learning_rate_init": 0.001
+        },
+        "cv_train_score": -0.005987980812524596,
+        "cv_val_score": -17.159669022342193,
+        "cv_scoring": "neg_mean_squared_error",
+        "test_metrics": {
+          "mse": 1.7543314067652171,
+          "rmse": 1.3245117616560516,
+          "mae": 0.9966624649766416,
+          "r2": -0.7543314067652171
+        },
+        "y_test": [
+          0,
+          2
+        ],
+        "y_pred": [
+          -0.12431199774921942,
+          3.869012932204064
+        ],
+        "training_info": {
+          "n_iter": 318,
+          "loss": 0.015313689620171047,
+          "n_layers": 3,
+          "n_outputs": 1,
+          "architecture": [
+            16
+          ]
+        }
+      },
+      {
+        "trial": 2,
+        "best_params": {
+          "model__alpha": 0.001,
+          "model__batch_size": "auto",
+          "model__early_stopping": false,
+          "model__hidden_layer_sizes": [
+            16
+          ],
+          "model__learning_rate_init": 0.01
+        },
+        "cv_train_score": -0.0019481779366992296,
+        "cv_val_score": -1.3882635102965253,
+        "cv_scoring": "neg_mean_squared_error",
+        "test_metrics": {
+          "mse": 3.4713960119054765,
+          "rmse": 1.8631682725683896,
+          "mae": 1.8518274675068636,
+          "r2": 0.0
+        },
+        "y_test": [
+          0,
+          0
+        ],
+        "y_pred": [
+          2.0570859447802574,
+          1.64656899023347
+        ],
+        "training_info": {
+          "n_iter": 84,
+          "loss": 0.0014273771384987635,
+          "n_layers": 3,
+          "n_outputs": 1,
+          "architecture": [
+            16
+          ]
+        }
+      }
+    ]
+  }
+}

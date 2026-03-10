@@ -1,0 +1,37 @@
+======================================================================
+RESCUE EXPERIMENT - BOOSTING RESULTS
+======================================================================
+
+--------------------------------------------------
+PERFORMANCE BY SPLIT (averaged over 3 trials)
+--------------------------------------------------
+
+Split      CV Train     CV Val       Test R2      Test RMSE    Test MAE    
+----------------------------------------------------------------------
+50_50      -1.2622      -2.9239      -1.0274      1.7370       1.4126      
+80_20      -1.4019      -2.4626      -0.0009      1.4306       1.4286      
+
+--------------------------------------------------
+BEST MODEL (lowest RMSE)
+--------------------------------------------------
+Split: 80_20
+Trial: 2
+
+Best Parameters:
+  model__learning_rate: 0.01
+  model__max_depth: 3
+  model__n_estimators: 50
+  model__reg_lambda: 100
+  model__subsample: 0.8
+
+Test Metrics:
+  R2:   -0.0028
+  RMSE: 1.0014
+  MAE:  0.9955
+
+--------------------------------------------------
+INTERPRETATION
+--------------------------------------------------
+Model Quality: POOR (R2 = -0.0028)
+The model explains -0.3% of variance in PeopleRescued.
+Average prediction error: +/- 0.996 people

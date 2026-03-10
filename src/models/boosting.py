@@ -86,13 +86,16 @@ def run_boosting_experiment(
     random_state: int = 42,
     param_grid: dict | None = None,
     scoring: str | None = None,
+    cv_folds: int | object = 5,
 ):
     """
     Run XGBoost experiment (classification or regression).
-    
+
     XGBoost has built-in regularization:
     - reg_alpha: L1 regularization (default 0)
     - reg_lambda: L2 regularization (default 1)
+
+    cv_folds: int for KFold/StratifiedKFold, or a cv splitter object (e.g. LeaveOneOut()).
     """
     np.random.seed(random_state)
 
@@ -167,10 +170,13 @@ def run_boosting_experiment(
     # =========================
     # 4. Grid search CV
     # =========================
-    if problem_type == "classification":
-        cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=random_state)
+    if isinstance(cv_folds, int):
+        if problem_type == "classification":
+            cv = StratifiedKFold(n_splits=cv_folds, shuffle=True, random_state=random_state)
+        else:
+            cv = KFold(n_splits=cv_folds, shuffle=True, random_state=random_state)
     else:
-        cv = KFold(n_splits=5, shuffle=True, random_state=random_state)
+        cv = cv_folds  # Pre-built cv splitter (e.g. LeaveOneOut)
 
     grid_search = GridSearchCV(
         estimator=pipeline,
