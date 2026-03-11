@@ -252,11 +252,11 @@ def generate_boosting(train_df, test_df, random_state, predictors, target_col, i
     Grid: 108 combinations.
     """
     param_grid = {
-        "model__n_estimators":   [50, 100, 200],
+        "model__n_estimators":   [50, 100],
         "model__learning_rate":  [0.01, 0.05, 0.1],
-        "model__max_depth":      [2, 3, 5],
+        "model__max_depth":      [2, 3, 5, None],
         "model__subsample":      [0.8, 1.0],
-        "model__reg_lambda":     [1, 5],
+        "model__reg_lambda":     [1, 5, 10],
     }
     return run_boosting_experiment(
         train_df=train_df,
@@ -277,10 +277,10 @@ def generate_random_forest(train_df, test_df, random_state, predictors, target_c
     Grid: 96 combinations.
     """
     param_grid = {
-        "model__n_estimators":      [100, 200, 300],
-        "model__max_depth":         [3, 5, 10, None],
-        "model__min_samples_split": [2, 5],
-        "model__min_samples_leaf":  [1, 2],
+        "model__n_estimators":      [50, 100],
+        "model__max_depth":         [1, 2, 3, 5, None],
+        "model__min_samples_split": [2, 5, 10],
+        "model__min_samples_leaf":  [1, 2, 4],
         "model__max_features":      ["sqrt", "log2"],
     }
     return run_random_forest_experiment(
@@ -302,10 +302,10 @@ def generate_neural_network(train_df, test_df, random_state, predictors, target_
     Grid: 36 combinations.
     """
     param_grid = {
-        "model__alpha":              [0.001, 0.01, 0.1],
-        "model__learning_rate_init": [0.001, 0.005, 0.01],
+        "model__alpha":              [0.001, 0.01, 0.1, 0.0001],
+        "model__learning_rate_init": [0.001, 0.005, 0.01, 0.05],
     }
-    hidden_layer_sizes_grid = [(16,), (32,), (64,), (32, 16)]
+    hidden_layer_sizes_grid = [(16,), (32,), (64,), (32, 16), (64, 32)]
 
     return run_neural_net_experiment(
         train_df=train_df,
