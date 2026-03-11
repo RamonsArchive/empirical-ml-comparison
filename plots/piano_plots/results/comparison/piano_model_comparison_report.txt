@@ -1,0 +1,45 @@
+================================================================================
+PIANO EMOTION CLASSIFICATION — MODEL COMPARISON SUMMARY
+================================================================================
+
+EXPERIMENT OVERVIEW
+--------------------------------------------------------------------------------
+Task:         Binary Classification (emotional=0 vs happy=1)
+Dataset:      18 songs x 3 clips = 54 samples (27 per class)
+Features:     Top-20 by effect size (acoustic, rhythmic, timbral)
+CV:           Leave-One-Song-Out (18 folds)
+Inner CV:     StratifiedKFold(5) for GridSearchCV hyperparameter tuning
+Trials:       3 per model with different random seeds (averaged)
+Baseline:     F1 = 0.50, Accuracy = 0.50 (balanced classes)
+
+IMPORTANT: Labels reflect musical style/acoustic activity, NOT
+validated emotional ground truth.
+
+--------------------------------------------------------------------------------
+AVERAGE TEST METRICS BY MODEL (averaged over 3 trials)
+--------------------------------------------------------------------------------
+Model                         Accuracy              F1       Precision          Recall         ROC-AUC
+--------------------------------------------------------------------------------
+boosting                0.7160±0.0087  0.7229±0.0061  0.7061±0.0116  0.7407±0.0000  0.7984±0.0466
+random_forest           0.7531±0.0087  0.7399±0.0146  0.7812±0.0092  0.7037±0.0302  0.7814±0.0068
+neural_network          0.7531±0.0630  0.7434±0.0476  0.7953±0.1042  0.7037±0.0000  0.8249±0.0830
+
+--------------------------------------------------------------------------------
+TRAIN vs TEST F1 (overfitting check — gap > 0.20 flagged)
+--------------------------------------------------------------------------------
+Model                        Train F1        Test F1        Gap Flag
+-----------------------------------------------------------------
+boosting                 0.9862±0.0042   0.7229±0.0061    +0.2632 OVERFIT
+random_forest            0.9900±0.0006   0.7399±0.0146    +0.2501 OVERFIT
+neural_network           0.8005±0.0648   0.7434±0.0476    +0.0571 OK
+
+--------------------------------------------------------------------------------
+BEST SINGLE TRIAL (for reference only)
+--------------------------------------------------------------------------------
+  Model:     neural_network
+  Trial:     1
+  Accuracy:  0.8148
+  Precision: 0.9048
+  Recall:    0.7037
+  F1:        0.7917
+  ROC-AUC:   0.9053

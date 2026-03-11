@@ -1,0 +1,77 @@
+======================================================================
+PIANO EMOTION CLASSIFICATION — RANDOM_FOREST RESULTS
+======================================================================
+
+----------------------------------------------------------------------
+PERFORMANCE (averaged over 3 trials)
+----------------------------------------------------------------------
+
+Split        Accuracy       Precision      Recall         F1             ROC-AUC       
+----------------------------------------------------------------------
+LOGO_CV      0.7531±0.0087  0.7812±0.0092  0.7037±0.0302  0.7399±0.0146  0.7814±0.0068 
+
+----------------------------------------------------------------------
+OVERFITTING CHECK (train vs test, averaged over 3 trials)
+----------------------------------------------------------------------
+
+  Split: LOGO_CV
+  Train accuracy    : 0.9902±0.0009  |  Test: 0.7531±0.0087  |  Gap: +0.2371  *** OVERFIT
+  Train precision   : 1.0000±0.0000  |  Test: 0.7812±0.0092  |  Gap: +0.2188  *** OVERFIT
+  Train recall      : 0.9805±0.0013  |  Test: 0.7037±0.0302  |  Gap: +0.2767  *** OVERFIT
+  Train f1          : 0.9900±0.0006  |  Test: 0.7399±0.0146  |  Gap: +0.2501  *** OVERFIT
+  Train roc_auc     : 0.9997±0.0003  |  Test: 0.7814±0.0068  |  Gap: +0.2182  *** OVERFIT
+
+----------------------------------------------------------------------
+BEST TRIAL (highest mean F1 = 0.7547)
+----------------------------------------------------------------------
+  Split: LOGO_CV
+  Trial: 1
+
+  Best Hyperparameters (from fold with highest inner CV):
+    model__max_depth: 5
+    model__max_features: sqrt
+    model__min_samples_leaf: 2
+    model__min_samples_split: 2
+    model__n_estimators: 100
+
+  Test Metrics (mean across 18 LOGO-CV folds):
+    Accuracy:  0.7593
+    Precision: 0.7692
+    Recall:    0.7407
+    F1:        0.7547
+    ROC-AUC:   0.7901
+
+  Train Metrics:
+    Accuracy:  0.9891
+    F1:        0.9893
+
+  Per-Fold Breakdown (18 folds):
+  Fold  Song                                      Acc     F1   Prec    Rec
+  --------------------------------------------------------------------
+  1     Beethoven - Moonlight Sonata (1st Mo    1.000  0.000  0.000  0.000
+  2     Cherished Memories (From Pluto)         1.000  0.000  0.000  0.000
+  3     Chilly Gonzales - White Keys (from S    0.000  0.000  0.000  0.000
+  4     Dill Pickles                            1.000  1.000  1.000  1.000
+  5     Echo of Spring                          0.667  0.800  1.000  0.667
+  6     Haydn - Piano Sonata in E-Flat Major    0.333  0.500  1.000  0.333
+  7     Kitten on the Keys by Zez Confrey (n    1.000  1.000  1.000  1.000
+  8     Ludovico Einaudi - Experience (solo     1.000  0.000  0.000  0.000
+  9     Max Richter - Written On The Sky (Of    0.667  0.000  0.000  0.000
+  10    Mozart - Piano Sonata No. 16 in C Ma    1.000  1.000  1.000  1.000
+  11    Mozart - Rondo Alla Turca (Turkish M    1.000  1.000  1.000  1.000
+  12    NARUTO - Sadness and Sorrow (Grand P    0.667  0.000  0.000  0.000
+  13    Peder B. Helland - You & Me (Piano V    1.000  0.000  0.000  0.000
+  14    The Entertainer                         1.000  1.000  1.000  1.000
+  15    The Heart Asks Pleasure First - Mich    0.667  0.800  1.000  0.667
+  16    Yann Tiersen - Comptine dun autre et    0.667  0.000  0.000  0.000
+  17    Yiruma - When The Love Falls            1.000  0.000  0.000  0.000
+  18    Yiruma, (이루마) - River Flows in Yo    0.000  0.000  0.000  0.000
+
+----------------------------------------------------------------------
+INTERPRETATION
+----------------------------------------------------------------------
+  Model Quality: GOOD (Best Mean F1 = 0.7547)
+  Baseline: F1=0.50, Accuracy=0.50 (balanced classes)
+
+  NOTE: Labels classify piano music by acoustic activity and style,
+  not by validated emotional ground truth.
