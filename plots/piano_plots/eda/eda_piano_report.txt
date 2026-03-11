@@ -1,0 +1,200 @@
+======================================================================
+PIANO EMOTION CLASSIFICATION — EXPLORATORY DATA ANALYSIS
+======================================================================
+
+Task:   Binary classification (emotional=0 vs happy=1)
+Design: 18 songs x 3 random 30-second clips = 54 samples
+CV:     Leave-One-Song-Out (LOGO-CV) — 18 folds
+Note:   Labels reflect musical style/activity, not validated emotion ground truth.
+
+--------------------------------------------------
+DATASET OVERVIEW
+--------------------------------------------------
+Total rows:           54
+Total songs:          18
+Clips per song:       3
+Emotional clips (0):  27  (50.0%)
+Happy clips (1):      27  (50.0%)
+Class balance:        PERFECT (27/27) — no resampling needed
+
+--------------------------------------------------
+EMOTIONAL SONGS (label = 0)
+--------------------------------------------------
+  Beethoven - Moonlight Sonata (1st Movement)
+  Cherished Memories (From Pluto)
+  Ludovico Einaudi - Experience (solo piano performance)
+  Max Richter - Written On The Sky (Official Audio)
+  NARUTO - Sadness and Sorrow (Grand Piano Cover)  Sheet Music
+  Peder B. Helland - You & Me (Piano Version)
+  Yann Tiersen - Comptine dun autre ete - lapres-midi
+  Yiruma - When The Love Falls
+  Yiruma, (이루마) - River Flows in You
+
+--------------------------------------------------
+HAPPY SONGS (label = 1)
+--------------------------------------------------
+  Chilly Gonzales - White Keys (from SOLO PIANO II)
+  Dill Pickles
+  Echo of Spring
+  Haydn - Piano Sonata in E-Flat Major, No.62, Hob.XVI52
+  Kitten on the Keys by Zez Confrey (newer version)  Cory Hall, pianist-composer
+  Mozart - Piano Sonata No. 16 in C Major, K.545 (1st Mvt)
+  Mozart - Rondo Alla Turca (Turkish March)
+  The Entertainer
+  The Heart Asks Pleasure First - Michael Nyman
+
+--------------------------------------------------
+NAIVE BASELINE
+--------------------------------------------------
+Majority class predictor accuracy: 0.5000 (always predicts either class)
+Majority class F1:                 0.5000
+A useful model must exceed F1 = 0.50 and ROC-AUC = 0.50.
+
+--------------------------------------------------
+TOP-20 FEATURES — CLASS STATISTICS
+--------------------------------------------------
+
+Feature                          Emo Mean  Happy Mean   Cohen d Direction
+---------------------------------------------------------------------------
+onset_strength_mean                0.6800      1.0281     1.964 Happy > Emo
+stft_mid_mean                    -58.8046    -48.4867     1.624 Happy > Emo
+stft_spectral_flux_mean            2.7909      4.1672     1.617 Happy > Emo
+note_density                       2.7728      4.4173     1.583 Happy > Emo
+stft_presence_std                  2.0164      6.2355     1.541 Happy > Emo
+mfcc_2_mean                       31.6466    -21.4697     1.491 Emo > Happy
+onset_strength_std                 0.9092      1.3467     1.420 Happy > Emo
+stft_high_mid_mean               -75.6694    -64.0839     1.379 Happy > Emo
+stft_high_mid_std                  7.0431     10.4917     1.315 Happy > Emo
+stft_brilliance_std                0.5561      2.6790     1.184 Happy > Emo
+stft_presence_mean               -79.5003    -73.4868     1.097 Happy > Emo
+stft_mid_std                      15.1875     13.6706     1.066 Emo > Happy
+mt_spectral_rolloff_95           883.8951   1455.7852     1.061 Happy > Emo
+stft_spectral_flux_std             0.9309      1.1626     1.053 Happy > Emo
+zcr_mean                           0.0441      0.0628     1.036 Happy > Emo
+welch_spectral_spread            270.6612    450.4571     1.035 Happy > Emo
+stft_low_mid_mean                -39.6094    -35.1884     0.968 Happy > Emo
+mfcc_0_mean                     -106.0007    -32.1660     1.419 Happy > Emo
+stft_brilliance_mean             -79.9554    -78.8025     0.936 Happy > Emo
+coherence_bass                     0.6540      0.8062     0.935 Happy > Emo
+
+--------------------------------------------------
+ALL FEATURES — RANKED BY EFFECT SIZE (|Cohen's d|)
+--------------------------------------------------
+
+Rank   Feature                              |Cohen d| Direction
+-----------------------------------------------------------------
+1      onset_strength_mean                      1.964 Happy > Emo
+2      stft_mid_mean                            1.624 Happy > Emo
+3      stft_spectral_flux_mean                  1.617 Happy > Emo
+4      note_density                             1.583 Happy > Emo
+5      stft_presence_std                        1.541 Happy > Emo
+6      mfcc_2_mean                              1.491 Emo > Happy
+7      onset_strength_std                       1.420 Happy > Emo
+8      mfcc_0_mean                              1.419 Happy > Emo
+9      stft_high_mid_mean                       1.379 Happy > Emo
+10     stft_high_mid_std                        1.315 Happy > Emo
+11     stft_brilliance_std                      1.184 Happy > Emo
+12     stft_presence_mean                       1.097 Happy > Emo
+13     stft_mid_std                             1.066 Emo > Happy
+14     mt_spectral_rolloff_95                   1.061 Happy > Emo
+15     stft_spectral_flux_std                   1.053 Happy > Emo
+16     zcr_mean                                 1.036 Happy > Emo
+17     welch_spectral_spread                    1.035 Happy > Emo
+18     stft_low_mid_mean                        0.968 Happy > Emo
+19     stft_brilliance_mean                     0.936 Happy > Emo
+20     coherence_bass                           0.935 Happy > Emo
+21     coherence_low_mid                        0.906 Happy > Emo
+22     stft_bass_std                            0.884 Emo > Happy
+23     pdc_lr_low_mid                           0.881 Happy > Emo
+24     mt_high_mid_power                        0.872 Happy > Emo
+25     welch_high_mid_power                     0.867 Happy > Emo
+26     mt_spectral_rolloff_85                   0.857 Happy > Emo
+27     mt_spectral_flatness                     0.854 Happy > Emo
+28     welch_spectral_centroid                  0.848 Happy > Emo
+29     cross_mt_high_mid_mag                    0.835 Happy > Emo
+30     cross_welch_high_mid_mag                 0.815 Happy > Emo
+
+--------------------------------------------------
+INTER-FEATURE CORRELATIONS (Top 20)
+--------------------------------------------------
+
+Highly correlated pairs (|r| >= 0.80) — potential redundancy:
+  stft_brilliance_std <-> stft_presence_mean: r = 0.982
+  mt_spectral_rolloff_95 <-> welch_spectral_spread: r = 0.982
+  stft_spectral_flux_mean <-> stft_high_mid_mean: r = 0.982
+  stft_presence_mean <-> stft_brilliance_mean: r = 0.977
+  mfcc_2_mean <-> mfcc_0_mean: r = -0.969
+  stft_presence_std <-> stft_high_mid_mean: r = 0.960
+  mt_spectral_rolloff_95 <-> zcr_mean: r = 0.957
+  stft_spectral_flux_mean <-> stft_presence_std: r = 0.957
+  stft_brilliance_std <-> stft_brilliance_mean: r = 0.957
+  zcr_mean <-> welch_spectral_spread: r = 0.956
+  onset_strength_mean <-> stft_spectral_flux_mean: r = 0.955
+  stft_spectral_flux_mean <-> mfcc_0_mean: r = 0.947
+  stft_high_mid_mean <-> stft_presence_mean: r = 0.945
+  stft_high_mid_mean <-> stft_brilliance_std: r = 0.945
+  stft_high_mid_mean <-> mfcc_0_mean: r = 0.945
+  stft_mid_mean <-> mfcc_2_mean: r = -0.936
+  stft_mid_mean <-> stft_spectral_flux_mean: r = 0.936
+  stft_presence_std <-> mfcc_0_mean: r = 0.935
+  stft_mid_mean <-> mfcc_0_mean: r = 0.933
+  stft_spectral_flux_mean <-> mfcc_2_mean: r = -0.930
+  welch_spectral_spread <-> stft_brilliance_mean: r = 0.928
+  stft_presence_mean <-> welch_spectral_spread: r = 0.926
+  stft_brilliance_std <-> welch_spectral_spread: r = 0.920
+  stft_presence_std <-> stft_brilliance_std: r = 0.914
+  stft_high_mid_mean <-> welch_spectral_spread: r = 0.914
+  stft_presence_std <-> mfcc_2_mean: r = -0.912
+  stft_mid_mean <-> stft_high_mid_mean: r = 0.911
+  mt_spectral_rolloff_95 <-> stft_brilliance_mean: r = 0.910
+  mfcc_2_mean <-> stft_high_mid_mean: r = -0.906
+  onset_strength_mean <-> stft_presence_std: r = 0.905
+  mfcc_2_mean <-> stft_high_mid_std: r = -0.904
+  onset_strength_std <-> stft_spectral_flux_std: r = 0.903
+  onset_strength_mean <-> mfcc_2_mean: r = -0.901
+  stft_high_mid_mean <-> stft_brilliance_mean: r = 0.896
+  onset_strength_mean <-> onset_strength_std: r = 0.896
+  onset_strength_mean <-> stft_high_mid_mean: r = 0.896
+  stft_spectral_flux_mean <-> stft_brilliance_std: r = 0.896
+  stft_mid_mean <-> stft_presence_std: r = 0.896
+  stft_presence_mean <-> mt_spectral_rolloff_95: r = 0.895
+  onset_strength_mean <-> stft_mid_mean: r = 0.891
+  welch_spectral_spread <-> mfcc_0_mean: r = 0.890
+  stft_spectral_flux_mean <-> stft_presence_mean: r = 0.889
+  stft_brilliance_std <-> mt_spectral_rolloff_95: r = 0.888
+  zcr_mean <-> mfcc_0_mean: r = 0.885
+  stft_brilliance_std <-> mfcc_0_mean: r = 0.883
+  onset_strength_mean <-> mfcc_0_mean: r = 0.883
+  stft_high_mid_mean <-> zcr_mean: r = 0.879
+  stft_presence_std <-> stft_presence_mean: r = 0.877
+  stft_spectral_flux_mean <-> welch_spectral_spread: r = 0.873
+  stft_high_mid_mean <-> stft_mid_std: r = -0.871
+  stft_high_mid_mean <-> mt_spectral_rolloff_95: r = 0.866
+  stft_presence_mean <-> zcr_mean: r = 0.864
+  stft_presence_mean <-> mfcc_0_mean: r = 0.863
+  stft_spectral_flux_mean <-> zcr_mean: r = 0.863
+  stft_spectral_flux_mean <-> stft_mid_std: r = -0.858
+  stft_presence_std <-> welch_spectral_spread: r = 0.856
+  zcr_mean <-> stft_brilliance_mean: r = 0.856
+  mt_spectral_rolloff_95 <-> mfcc_0_mean: r = 0.853
+  stft_brilliance_std <-> zcr_mean: r = 0.851
+  stft_presence_std <-> stft_mid_std: r = -0.850
+  mfcc_2_mean <-> zcr_mean: r = -0.850
+  stft_spectral_flux_mean <-> onset_strength_std: r = 0.843
+  stft_spectral_flux_mean <-> stft_brilliance_mean: r = 0.837
+  stft_mid_mean <-> stft_mid_std: r = -0.835
+  mfcc_2_mean <-> onset_strength_std: r = -0.834
+  stft_high_mid_std <-> mfcc_0_mean: r = 0.833
+  stft_mid_mean <-> stft_high_mid_std: r = 0.830
+  stft_mid_std <-> mfcc_0_mean: r = -0.829
+  stft_spectral_flux_mean <-> mt_spectral_rolloff_95: r = 0.828
+  stft_presence_std <-> zcr_mean: r = 0.828
+  mfcc_2_mean <-> welch_spectral_spread: r = -0.825
+  mfcc_2_mean <-> stft_spectral_flux_std: r = -0.818
+  mfcc_0_mean <-> stft_brilliance_mean: r = 0.810
+  onset_strength_mean <-> zcr_mean: r = 0.810
+  stft_presence_std <-> onset_strength_std: r = 0.809
+  stft_presence_mean <-> stft_mid_std: r = -0.804
+  stft_presence_std <-> stft_brilliance_mean: r = 0.803
+  stft_brilliance_std <-> stft_mid_std: r = -0.802
+  stft_mid_mean <-> stft_brilliance_std: r = 0.802
