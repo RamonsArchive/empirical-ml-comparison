@@ -186,6 +186,36 @@ def _generate_classification_report(results, model_name, output_dir):
                     f"{ftm['precision']:>6.3f} {ftm['recall']:>6.3f}"
                 )
 
+    # ---- All trials: hyperparameters & metrics ----
+    r.append("\n" + "-" * 70)
+    r.append("ALL TRIALS — HYPERPARAMETERS & METRICS")
+    r.append("-" * 70)
+
+    for split_name in split_names:
+        trials = results[split_name]
+        for trial in trials:
+            trial_num = trial["trial"] + 1
+            tm = trial["test_metrics"]
+            tr = trial["train_metrics"]
+            r.append(f"\n  Trial {trial_num} (Split: {split_name})")
+            r.append("  " + "." * 40)
+            r.append(f"  Hyperparameters (from fold with highest inner CV):")
+            for param, val in trial["best_params"].items():
+                r.append(f"    {param}: {val}")
+            r.append(f"  Test Metrics:")
+            r.append(
+                f"    Accuracy: {_safe(tm.get('accuracy'))}  |  "
+                f"Precision: {_safe(tm.get('precision'))}  |  "
+                f"Recall: {_safe(tm.get('recall'))}  |  "
+                f"F1: {_safe(tm.get('f1'))}  |  "
+                f"ROC-AUC: {_safe(tm.get('roc_auc'))}"
+            )
+            r.append(f"  Train Metrics:")
+            r.append(
+                f"    Accuracy: {_safe(tr.get('accuracy'))}  |  "
+                f"F1: {_safe(tr.get('f1'))}"
+            )
+
     # ---- Interpretation ----
     r.append("\n" + "-" * 70)
     r.append("INTERPRETATION")
@@ -260,6 +290,63 @@ def _plot_confusion_matrix(best_trial, model_name, output_dir):
 
     plt.tight_layout()
     plt.savefig(os.path.join(output_dir, f"piano_{model_name}_confusion.png"), dpi=150)
+    plt.close()
+
+
+# ==========================================
+# Confusion matrix (averaged across all trials)
+# ==========================================
+
+def _plot_avg_confusion_matrix(trials, model_name, output_dir):
+    """Confusion matrix averaged across all trials' concatenated y_test/y_pred."""
+    n_trials = len(trials)
+    cms = []
+    for trial in trials:
+        y_test = np.array(trial["y_test"])
+        y_pred = np.array(trial["y_pred"])
+        tp = int(np.sum((y_test == 1) & (y_pred == 1)))
+        tn = int(np.sum((y_test == 0) & (y_pred == 0)))
+        fp = int(np.sum((y_test == 0) & (y_pred == 1)))
+        fn = int(np.sum((y_test == 1) & (y_pred == 0)))
+        cms.append(np.array([[tn, fp], [fn, tp]]))
+
+    cm_mean = np.mean(cms, axis=0)
+    cm_std = np.std(cms, axis=0)
+
+    fig, ax = plt.subplots(figsize=(7, 5.5))
+    im = ax.imshow(cm_mean, interpolation="nearest", cmap="Blues")
+    ax.figure.colorbar(im, ax=ax)
+
+    labels = ["Emotional (0)", "Happy (1)"]
+    ax.set(
+        xticks=[0, 1], yticks=[0, 1],
+        xticklabels=labels, yticklabels=labels,
+        ylabel="Actual", xlabel="Predicted",
+    )
+
+    total = cm_mean.sum()
+    acc = (cm_mean[0, 0] + cm_mean[1, 1]) / total if total > 0 else 0
+    ax.set_title(
+        f"{model_name.replace('_', ' ').title()}: Confusion Matrix\n"
+        f"(Averaged over {n_trials} Trials, N={int(total)}, Acc={acc:.3f})",
+        fontsize=11,
+    )
+
+    thresh = cm_mean.max() / 2.0
+    for i in range(2):
+        for j in range(2):
+            cell_text = f"{cm_mean[i, j]:.1f}\n(\u00b1{cm_std[i, j]:.1f})"
+            ax.text(
+                j, i, cell_text,
+                ha="center", va="center",
+                color="white" if cm_mean[i, j] > thresh else "black",
+                fontsize=14,
+            )
+
+    plt.tight_layout()
+    plt.savefig(
+        os.path.join(output_dir, f"piano_{model_name}_confusion_avg.png"), dpi=150
+    )
     plt.close()
 
 
@@ -366,6 +453,67 @@ def _plot_per_fold_metrics(best_trial, model_name, output_dir):
 
 
 # ==========================================
+# Per-fold metrics (averaged across all trials)
+# ==========================================
+
+def _plot_avg_per_fold_metrics(trials, model_name, output_dir):
+    """Per-fold accuracy and F1 averaged across all trials."""
+    all_fold_details = [t.get("fold_details", []) for t in trials]
+    if not all_fold_details or not all_fold_details[0]:
+        return
+
+    n_folds = len(all_fold_details[0])
+    n_trials = len(trials)
+    songs = [f["test_song"].replace(" - ", "\n")[:28] for f in all_fold_details[0]]
+
+    fold_accs = np.zeros((n_trials, n_folds))
+    fold_f1s = np.zeros((n_trials, n_folds))
+
+    for t_idx, folds in enumerate(all_fold_details):
+        for f_idx, fd in enumerate(folds):
+            fold_accs[t_idx, f_idx] = fd["test_metrics"]["accuracy"]
+            fold_f1s[t_idx, f_idx] = fd["test_metrics"]["f1"]
+
+    acc_means = fold_accs.mean(axis=0)
+    acc_stds = fold_accs.std(axis=0)
+    f1_means = fold_f1s.mean(axis=0)
+    f1_stds = fold_f1s.std(axis=0)
+
+    x = np.arange(n_folds)
+    width = 0.38
+
+    fig, ax = plt.subplots(figsize=(max(14, n_folds * 0.8), 6))
+    ax.bar(x - width / 2, acc_means, width, yerr=acc_stds, capsize=3,
+           label="Accuracy", color="steelblue", alpha=0.85, edgecolor="black")
+    ax.bar(x + width / 2, f1_means, width, yerr=f1_stds, capsize=3,
+           label="F1 Score", color="coral", alpha=0.85, edgecolor="black")
+
+    ax.axhline(y=np.mean(acc_means), color="steelblue", linestyle="--", alpha=0.6,
+               label=f"Mean Acc = {np.mean(acc_means):.3f}")
+    ax.axhline(y=np.mean(f1_means), color="coral", linestyle="--", alpha=0.6,
+               label=f"Mean F1  = {np.mean(f1_means):.3f}")
+    ax.axhline(y=0.5, color="gray", linestyle=":", alpha=0.5, label="Baseline = 0.50")
+
+    ax.set_xticks(x)
+    ax.set_xticklabels(songs, rotation=45, ha="right", fontsize=8)
+    ax.set_ylabel("Score (mean \u00b1 std across trials)", fontsize=11)
+    ax.set_ylim(0, 1.15)
+    ax.set_title(
+        f"{model_name.replace('_', ' ').title()}: Per-Fold Metrics\n"
+        f"(averaged over {n_trials} trials, each fold = one held-out song)",
+        fontsize=12,
+    )
+    ax.legend(fontsize=9, loc="lower right")
+    ax.grid(True, axis="y", alpha=0.3)
+
+    plt.tight_layout()
+    plt.savefig(
+        os.path.join(output_dir, f"piano_{model_name}_per_fold_avg.png"), dpi=150
+    )
+    plt.close()
+
+
+# ==========================================
 # Feature importances
 # ==========================================
 
@@ -413,12 +561,15 @@ def plot_piano_boosting_summary(results, output_dir):
     print(f"[plot] Generating {model_name} piano plots to {output_dir}")
 
     best_trial = _generate_classification_report(results, model_name, output_dir)
+    trials = results["LOGO_CV"]
 
     if best_trial:
         _plot_confusion_matrix(best_trial, model_name, output_dir)
         _plot_feature_importances(best_trial, model_name, output_dir)
         _plot_per_fold_metrics(best_trial, model_name, output_dir)
 
+    _plot_avg_confusion_matrix(trials, model_name, output_dir)
+    _plot_avg_per_fold_metrics(trials, model_name, output_dir)
     _plot_train_vs_test(results, model_name, output_dir)
     print(f"[plot] Saved {model_name} piano plots and report")
 
@@ -430,12 +581,15 @@ def plot_piano_random_forest_summary(results, output_dir):
     print(f"[plot] Generating {model_name} piano plots to {output_dir}")
 
     best_trial = _generate_classification_report(results, model_name, output_dir)
+    trials = results["LOGO_CV"]
 
     if best_trial:
         _plot_confusion_matrix(best_trial, model_name, output_dir)
         _plot_feature_importances(best_trial, model_name, output_dir)
         _plot_per_fold_metrics(best_trial, model_name, output_dir)
 
+    _plot_avg_confusion_matrix(trials, model_name, output_dir)
+    _plot_avg_per_fold_metrics(trials, model_name, output_dir)
     _plot_train_vs_test(results, model_name, output_dir)
     print(f"[plot] Saved {model_name} piano plots and report")
 
@@ -447,11 +601,14 @@ def plot_piano_neural_network_summary(results, output_dir):
     print(f"[plot] Generating {model_name} piano plots to {output_dir}")
 
     best_trial = _generate_classification_report(results, model_name, output_dir)
+    trials = results["LOGO_CV"]
 
     if best_trial:
         _plot_confusion_matrix(best_trial, model_name, output_dir)
         _plot_per_fold_metrics(best_trial, model_name, output_dir)
 
+    _plot_avg_confusion_matrix(trials, model_name, output_dir)
+    _plot_avg_per_fold_metrics(trials, model_name, output_dir)
     _plot_train_vs_test(results, model_name, output_dir)
     print(f"[plot] Saved {model_name} piano plots and report")
 

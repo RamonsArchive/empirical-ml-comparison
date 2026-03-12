@@ -68,6 +68,49 @@ BEST TRIAL (highest mean F1 = 0.7692)
   18    Yiruma, (이루마) - River Flows in Yo    0.000  0.000  0.000  0.000
 
 ----------------------------------------------------------------------
+ALL TRIALS — HYPERPARAMETERS & METRICS
+----------------------------------------------------------------------
+
+  Trial 1 (Split: LOGO_CV)
+  ........................................
+  Hyperparameters (from fold with highest inner CV):
+    model__max_depth: 5
+    model__max_features: sqrt
+    model__min_samples_leaf: 2
+    model__min_samples_split: 2
+    model__n_estimators: 100
+  Test Metrics:
+    Accuracy: 0.7222  |  Precision: 0.7500  |  Recall: 0.6667  |  F1: 0.7059  |  ROC-AUC: 0.7723
+  Train Metrics:
+    Accuracy: 0.9749  |  F1: 0.9741
+
+  Trial 2 (Split: LOGO_CV)
+  ........................................
+  Hyperparameters (from fold with highest inner CV):
+    model__max_depth: 3
+    model__max_features: sqrt
+    model__min_samples_leaf: 2
+    model__min_samples_split: 2
+    model__n_estimators: 50
+  Test Metrics:
+    Accuracy: 0.7778  |  Precision: 0.8000  |  Recall: 0.7407  |  F1: 0.7692  |  ROC-AUC: 0.8203
+  Train Metrics:
+    Accuracy: 0.9728  |  F1: 0.9715
+
+  Trial 3 (Split: LOGO_CV)
+  ........................................
+  Hyperparameters (from fold with highest inner CV):
+    model__max_depth: 5
+    model__max_features: sqrt
+    model__min_samples_leaf: 1
+    model__min_samples_split: 2
+    model__n_estimators: 50
+  Test Metrics:
+    Accuracy: 0.7778  |  Precision: 0.8000  |  Recall: 0.7407  |  F1: 0.7692  |  ROC-AUC: 0.7641
+  Train Metrics:
+    Accuracy: 0.9368  |  F1: 0.9340
+
+----------------------------------------------------------------------
 INTERPRETATION
 ----------------------------------------------------------------------
   Model Quality: GOOD (Best Mean F1 = 0.7692)
