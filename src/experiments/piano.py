@@ -252,7 +252,7 @@ def generate_boosting(train_df, test_df, random_state, predictors, target_col, i
     Grid: 108 combinations.
     """
     param_grid = {
-        "model__n_estimators":   [50, 100],
+        "model__n_estimators":   [10, 25, 50, 100],
         "model__learning_rate":  [0.01, 0.05, 0.1],
         "model__max_depth":      [2, 3, 5, None],
         "model__subsample":      [0.8, 1.0],
@@ -277,7 +277,7 @@ def generate_random_forest(train_df, test_df, random_state, predictors, target_c
     Grid: 96 combinations.
     """
     param_grid = {
-        "model__n_estimators":      [50, 100],
+        "model__n_estimators":      [10, 25, 50, 100],
         "model__max_depth":         [1, 2, 3, 5, None],
         "model__min_samples_split": [2, 5, 10],
         "model__min_samples_leaf":  [1, 2, 4],

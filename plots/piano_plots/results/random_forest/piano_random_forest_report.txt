@@ -8,62 +8,62 @@ PERFORMANCE (averaged over 3 trials)
 
 Split        Accuracy       Precision      Recall         F1             ROC-AUC       
 ----------------------------------------------------------------------
-LOGO_CV      0.7593±0.0262  0.7833±0.0236  0.7160±0.0349  0.7481±0.0299  0.7856±0.0248 
+LOGO_CV      0.7654±0.0572  0.7992±0.0372  0.7037±0.1048  0.7461±0.0765  0.7723±0.0090 
 
 ----------------------------------------------------------------------
 OVERFITTING CHECK (train vs test, averaged over 3 trials)
 ----------------------------------------------------------------------
 
   Split: LOGO_CV
-  Train accuracy    : 0.9615±0.0175  |  Test: 0.7593±0.0262  |  Gap: +0.2023  *** OVERFIT
-  Train precision   : 0.9766±0.0157  |  Test: 0.7833±0.0236  |  Gap: +0.1933
-  Train recall      : 0.9447±0.0212  |  Test: 0.7160±0.0349  |  Gap: +0.2287  *** OVERFIT
-  Train f1          : 0.9599±0.0183  |  Test: 0.7481±0.0299  |  Gap: +0.2118  *** OVERFIT
-  Train roc_auc     : 0.9909±0.0046  |  Test: 0.7856±0.0248  |  Gap: +0.2053  *** OVERFIT
+  Train accuracy    : 0.9695±0.0044  |  Test: 0.7654±0.0572  |  Gap: +0.2041  *** OVERFIT
+  Train precision   : 0.9808±0.0053  |  Test: 0.7992±0.0372  |  Gap: +0.1816
+  Train recall      : 0.9570±0.0062  |  Test: 0.7037±0.1048  |  Gap: +0.2533  *** OVERFIT
+  Train f1          : 0.9682±0.0046  |  Test: 0.7461±0.0765  |  Gap: +0.2221  *** OVERFIT
+  Train roc_auc     : 0.9927±0.0021  |  Test: 0.7723±0.0090  |  Gap: +0.2205  *** OVERFIT
 
 ----------------------------------------------------------------------
-BEST TRIAL (highest mean F1 = 0.7692)
+BEST TRIAL (highest mean F1 = 0.8077)
 ----------------------------------------------------------------------
   Split: LOGO_CV
-  Trial: 2
+  Trial: 3
 
   Best Hyperparameters (from fold with highest inner CV):
-    model__max_depth: 3
+    model__max_depth: 5
     model__max_features: sqrt
-    model__min_samples_leaf: 2
+    model__min_samples_leaf: 1
     model__min_samples_split: 2
-    model__n_estimators: 50
+    model__n_estimators: 25
 
   Test Metrics (mean across 18 LOGO-CV folds):
-    Accuracy:  0.7778
-    Precision: 0.8000
-    Recall:    0.7407
-    F1:        0.7692
-    ROC-AUC:   0.8203
+    Accuracy:  0.8148
+    Precision: 0.8400
+    Recall:    0.7778
+    F1:        0.8077
+    ROC-AUC:   0.7723
 
   Train Metrics:
-    Accuracy:  0.9728
-    F1:        0.9715
+    Accuracy:  0.9641
+    F1:        0.9625
 
   Per-Fold Breakdown (18 folds):
   Fold  Song                                      Acc     F1   Prec    Rec
   --------------------------------------------------------------------
   1     Beethoven - Moonlight Sonata (1st Mo    1.000  0.000  0.000  0.000
-  2     Cherished Memories (From Pluto)         0.667  0.000  0.000  0.000
+  2     Cherished Memories (From Pluto)         1.000  0.000  0.000  0.000
   3     Chilly Gonzales - White Keys (from S    0.000  0.000  0.000  0.000
   4     Dill Pickles                            1.000  1.000  1.000  1.000
   5     Echo of Spring                          0.667  0.800  1.000  0.667
-  6     Haydn - Piano Sonata in E-Flat Major    0.333  0.500  1.000  0.333
+  6     Haydn - Piano Sonata in E-Flat Major    0.667  0.800  1.000  0.667
   7     Kitten on the Keys by Zez Confrey (n    1.000  1.000  1.000  1.000
   8     Ludovico Einaudi - Experience (solo     1.000  0.000  0.000  0.000
   9     Max Richter - Written On The Sky (Of    1.000  0.000  0.000  0.000
   10    Mozart - Piano Sonata No. 16 in C Ma    1.000  1.000  1.000  1.000
   11    Mozart - Rondo Alla Turca (Turkish M    1.000  1.000  1.000  1.000
-  12    NARUTO - Sadness and Sorrow (Grand P    1.000  0.000  0.000  0.000
+  12    NARUTO - Sadness and Sorrow (Grand P    0.667  0.000  0.000  0.000
   13    Peder B. Helland - You & Me (Piano V    1.000  0.000  0.000  0.000
   14    The Entertainer                         1.000  1.000  1.000  1.000
   15    The Heart Asks Pleasure First - Mich    0.667  0.800  1.000  0.667
-  16    Yann Tiersen - Comptine dun autre et    0.667  0.000  0.000  0.000
+  16    Yann Tiersen - Comptine dun autre et    1.000  0.000  0.000  0.000
   17    Yiruma - When The Love Falls            1.000  0.000  0.000  0.000
   18    Yiruma, (이루마) - River Flows in Yo    0.000  0.000  0.000  0.000
 
@@ -74,28 +74,28 @@ ALL TRIALS — HYPERPARAMETERS & METRICS
   Trial 1 (Split: LOGO_CV)
   ........................................
   Hyperparameters (from fold with highest inner CV):
-    model__max_depth: 5
+    model__max_depth: 3
     model__max_features: sqrt
     model__min_samples_leaf: 2
     model__min_samples_split: 2
-    model__n_estimators: 100
+    model__n_estimators: 25
   Test Metrics:
-    Accuracy: 0.7222  |  Precision: 0.7500  |  Recall: 0.6667  |  F1: 0.7059  |  ROC-AUC: 0.7723
+    Accuracy: 0.6852  |  Precision: 0.7500  |  Recall: 0.5556  |  F1: 0.6383  |  ROC-AUC: 0.7613
   Train Metrics:
-    Accuracy: 0.9749  |  F1: 0.9741
+    Accuracy: 0.9749  |  F1: 0.9737
 
   Trial 2 (Split: LOGO_CV)
   ........................................
   Hyperparameters (from fold with highest inner CV):
     model__max_depth: 3
     model__max_features: sqrt
-    model__min_samples_leaf: 2
+    model__min_samples_leaf: 1
     model__min_samples_split: 2
-    model__n_estimators: 50
+    model__n_estimators: 10
   Test Metrics:
-    Accuracy: 0.7778  |  Precision: 0.8000  |  Recall: 0.7407  |  F1: 0.7692  |  ROC-AUC: 0.8203
+    Accuracy: 0.7963  |  Precision: 0.8077  |  Recall: 0.7778  |  F1: 0.7925  |  ROC-AUC: 0.7833
   Train Metrics:
-    Accuracy: 0.9728  |  F1: 0.9715
+    Accuracy: 0.9695  |  F1: 0.9684
 
   Trial 3 (Split: LOGO_CV)
   ........................................
@@ -104,16 +104,16 @@ ALL TRIALS — HYPERPARAMETERS & METRICS
     model__max_features: sqrt
     model__min_samples_leaf: 1
     model__min_samples_split: 2
-    model__n_estimators: 50
+    model__n_estimators: 25
   Test Metrics:
-    Accuracy: 0.7778  |  Precision: 0.8000  |  Recall: 0.7407  |  F1: 0.7692  |  ROC-AUC: 0.7641
+    Accuracy: 0.8148  |  Precision: 0.8400  |  Recall: 0.7778  |  F1: 0.8077  |  ROC-AUC: 0.7723
   Train Metrics:
-    Accuracy: 0.9368  |  F1: 0.9340
+    Accuracy: 0.9641  |  F1: 0.9625
 
 ----------------------------------------------------------------------
 INTERPRETATION
 ----------------------------------------------------------------------
-  Model Quality: GOOD (Best Mean F1 = 0.7692)
+  Model Quality: GOOD (Best Mean F1 = 0.8077)
   Baseline: F1=0.50, Accuracy=0.50 (balanced classes)
 
   NOTE: Labels classify piano music by acoustic activity and style,

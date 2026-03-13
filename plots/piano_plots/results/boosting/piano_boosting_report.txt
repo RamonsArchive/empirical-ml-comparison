@@ -8,42 +8,42 @@ PERFORMANCE (averaged over 3 trials)
 
 Split        Accuracy       Precision      Recall         F1             ROC-AUC       
 ----------------------------------------------------------------------
-LOGO_CV      0.7222±0.0000  0.7143±0.0000  0.7407±0.0000  0.7273±0.0000  0.8509±0.0299 
+LOGO_CV      0.6975±0.0087  0.6906±0.0103  0.7160±0.0175  0.7030±0.0096  0.8116±0.0337 
 
 ----------------------------------------------------------------------
 OVERFITTING CHECK (train vs test, averaged over 3 trials)
 ----------------------------------------------------------------------
 
   Split: LOGO_CV
-  Train accuracy    : 0.9775±0.0034  |  Test: 0.7222±0.0000  |  Gap: +0.2553  *** OVERFIT
-  Train precision   : 0.9926±0.0057  |  Test: 0.7143±0.0000  |  Gap: +0.2783  *** OVERFIT
-  Train recall      : 0.9619±0.0020  |  Test: 0.7407±0.0000  |  Gap: +0.2212  *** OVERFIT
-  Train f1          : 0.9770±0.0033  |  Test: 0.7273±0.0000  |  Gap: +0.2497  *** OVERFIT
-  Train roc_auc     : 0.9976±0.0012  |  Test: 0.8509±0.0299  |  Gap: +0.1466
+  Train accuracy    : 0.9680±0.0068  |  Test: 0.6975±0.0087  |  Gap: +0.2705  *** OVERFIT
+  Train precision   : 0.9820±0.0132  |  Test: 0.6906±0.0103  |  Gap: +0.2913  *** OVERFIT
+  Train recall      : 0.9558±0.0055  |  Test: 0.7160±0.0175  |  Gap: +0.2397  *** OVERFIT
+  Train f1          : 0.9680±0.0059  |  Test: 0.7030±0.0096  |  Gap: +0.2650  *** OVERFIT
+  Train roc_auc     : 0.9950±0.0022  |  Test: 0.8116±0.0337  |  Gap: +0.1834
 
 ----------------------------------------------------------------------
-BEST TRIAL (highest mean F1 = 0.7273)
+BEST TRIAL (highest mean F1 = 0.7143)
 ----------------------------------------------------------------------
   Split: LOGO_CV
-  Trial: 1
+  Trial: 2
 
   Best Hyperparameters (from fold with highest inner CV):
     model__learning_rate: 0.01
     model__max_depth: 2
-    model__n_estimators: 50
-    model__reg_lambda: 1
-    model__subsample: 1.0
+    model__n_estimators: 25
+    model__reg_lambda: 5
+    model__subsample: 0.8
 
   Test Metrics (mean across 18 LOGO-CV folds):
-    Accuracy:  0.7222
-    Precision: 0.7143
+    Accuracy:  0.7037
+    Precision: 0.6897
     Recall:    0.7407
-    F1:        0.7273
-    ROC-AUC:   0.8340
+    F1:        0.7143
+    ROC-AUC:   0.8450
 
   Train Metrics:
-    Accuracy:  0.9793
-    F1:        0.9786
+    Accuracy:  0.9608
+    F1:        0.9625
 
   Per-Fold Breakdown (18 folds):
   Fold  Song                                      Acc     F1   Prec    Rec
@@ -56,7 +56,7 @@ BEST TRIAL (highest mean F1 = 0.7273)
   6     Haydn - Piano Sonata in E-Flat Major    0.000  0.000  0.000  0.000
   7     Kitten on the Keys by Zez Confrey (n    1.000  1.000  1.000  1.000
   8     Ludovico Einaudi - Experience (solo     1.000  0.000  0.000  0.000
-  9     Max Richter - Written On The Sky (Of    1.000  0.000  0.000  0.000
+  9     Max Richter - Written On The Sky (Of    0.667  0.000  0.000  0.000
   10    Mozart - Piano Sonata No. 16 in C Ma    1.000  1.000  1.000  1.000
   11    Mozart - Rondo Alla Turca (Turkish M    1.000  1.000  1.000  1.000
   12    NARUTO - Sadness and Sorrow (Grand P    0.333  0.000  0.000  0.000
@@ -80,22 +80,22 @@ ALL TRIALS — HYPERPARAMETERS & METRICS
     model__reg_lambda: 1
     model__subsample: 1.0
   Test Metrics:
-    Accuracy: 0.7222  |  Precision: 0.7143  |  Recall: 0.7407  |  F1: 0.7273  |  ROC-AUC: 0.8340
+    Accuracy: 0.7037  |  Precision: 0.7037  |  Recall: 0.7037  |  F1: 0.7037  |  ROC-AUC: 0.8244
   Train Metrics:
-    Accuracy: 0.9793  |  F1: 0.9786
+    Accuracy: 0.9771  |  F1: 0.9761
 
   Trial 2 (Split: LOGO_CV)
   ........................................
   Hyperparameters (from fold with highest inner CV):
     model__learning_rate: 0.01
     model__max_depth: 2
-    model__n_estimators: 50
-    model__reg_lambda: 10
+    model__n_estimators: 25
+    model__reg_lambda: 5
     model__subsample: 0.8
   Test Metrics:
-    Accuracy: 0.7222  |  Precision: 0.7143  |  Recall: 0.7407  |  F1: 0.7273  |  ROC-AUC: 0.8930
+    Accuracy: 0.7037  |  Precision: 0.6897  |  Recall: 0.7407  |  F1: 0.7143  |  ROC-AUC: 0.8450
   Train Metrics:
-    Accuracy: 0.9728  |  F1: 0.9724
+    Accuracy: 0.9608  |  F1: 0.9625
 
   Trial 3 (Split: LOGO_CV)
   ........................................
@@ -106,14 +106,14 @@ ALL TRIALS — HYPERPARAMETERS & METRICS
     model__reg_lambda: 1
     model__subsample: 0.8
   Test Metrics:
-    Accuracy: 0.7222  |  Precision: 0.7143  |  Recall: 0.7407  |  F1: 0.7273  |  ROC-AUC: 0.8258
+    Accuracy: 0.6852  |  Precision: 0.6786  |  Recall: 0.7037  |  F1: 0.6909  |  ROC-AUC: 0.7654
   Train Metrics:
-    Accuracy: 0.9804  |  F1: 0.9799
+    Accuracy: 0.9662  |  F1: 0.9653
 
 ----------------------------------------------------------------------
 INTERPRETATION
 ----------------------------------------------------------------------
-  Model Quality: MODERATE (Best Mean F1 = 0.7273)
+  Model Quality: MODERATE (Best Mean F1 = 0.7143)
   Baseline: F1=0.50, Accuracy=0.50 (balanced classes)
 
   NOTE: Labels classify piano music by acoustic activity and style,

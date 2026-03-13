@@ -31,6 +31,7 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib.patches import Patch
 
 
 # ==========================================
@@ -457,7 +458,7 @@ def _plot_per_fold_metrics(best_trial, model_name, output_dir):
 # ==========================================
 
 def _plot_avg_per_fold_metrics(trials, model_name, output_dir):
-    """Per-fold accuracy and F1 averaged across all trials."""
+    """Per-song accuracy colored by true class label, averaged across all trials."""
     all_fold_details = [t.get("fold_details", []) for t in trials]
     if not all_fold_details or not all_fold_details[0]:
         return
@@ -466,47 +467,67 @@ def _plot_avg_per_fold_metrics(trials, model_name, output_dir):
     n_trials = len(trials)
     songs = [f["test_song"].replace(" - ", "\n")[:28] for f in all_fold_details[0]]
 
-    fold_accs = np.zeros((n_trials, n_folds))
-    fold_f1s = np.zeros((n_trials, n_folds))
+    # True class per fold — all 3 clips from the same song share one label
+    true_classes = [f["y_test"][0] for f in all_fold_details[0]]
 
+    # Collect per-fold accuracy across trials
+    fold_accs = np.zeros((n_trials, n_folds))
     for t_idx, folds in enumerate(all_fold_details):
         for f_idx, fd in enumerate(folds):
             fold_accs[t_idx, f_idx] = fd["test_metrics"]["accuracy"]
-            fold_f1s[t_idx, f_idx] = fd["test_metrics"]["f1"]
 
     acc_means = fold_accs.mean(axis=0)
     acc_stds = fold_accs.std(axis=0)
-    f1_means = fold_f1s.mean(axis=0)
-    f1_stds = fold_f1s.std(axis=0)
+
+    # Color bars by true class: blue = emotional (0), orange = happy (1)
+    CLASS_COLORS = {0: "steelblue", 1: "coral"}
+    CLASS_LABELS = {0: "Emotional (0)", 1: "Happy (1)"}
+    bar_colors = [CLASS_COLORS[c] for c in true_classes]
 
     x = np.arange(n_folds)
-    width = 0.38
-
     fig, ax = plt.subplots(figsize=(max(14, n_folds * 0.8), 6))
-    ax.bar(x - width / 2, acc_means, width, yerr=acc_stds, capsize=3,
-           label="Accuracy", color="steelblue", alpha=0.85, edgecolor="black")
-    ax.bar(x + width / 2, f1_means, width, yerr=f1_stds, capsize=3,
-           label="F1 Score", color="coral", alpha=0.85, edgecolor="black")
 
-    ax.axhline(y=np.mean(acc_means), color="steelblue", linestyle="--", alpha=0.6,
-               label=f"Mean Acc = {np.mean(acc_means):.3f}")
-    ax.axhline(y=np.mean(f1_means), color="coral", linestyle="--", alpha=0.6,
-               label=f"Mean F1  = {np.mean(f1_means):.3f}")
-    ax.axhline(y=0.5, color="gray", linestyle=":", alpha=0.5, label="Baseline = 0.50")
+    ax.bar(x, acc_means, 0.6, yerr=acc_stds, capsize=3,
+           color=bar_colors, alpha=0.85, edgecolor="black")
+
+    # Reference lines
+    mean_acc = float(np.mean(acc_means))
+    ax.axhline(y=mean_acc, color="dimgray", linestyle="--", alpha=0.7)
+    ax.axhline(y=0.5, color="gray", linestyle=":", alpha=0.5)
+
+    # Legend: class colors + reference lines
+    legend_handles = [
+        Patch(facecolor=CLASS_COLORS[0], edgecolor="black", alpha=0.85,
+              label=CLASS_LABELS[0]),
+        Patch(facecolor=CLASS_COLORS[1], edgecolor="black", alpha=0.85,
+              label=CLASS_LABELS[1]),
+        plt.Line2D([0], [0], color="dimgray", linestyle="--", alpha=0.7,
+                    label=f"Mean Acc = {mean_acc:.3f}"),
+        plt.Line2D([0], [0], color="gray", linestyle=":", alpha=0.5,
+                    label="Baseline = 0.50"),
+    ]
 
     ax.set_xticks(x)
     ax.set_xticklabels(songs, rotation=45, ha="right", fontsize=8)
-    ax.set_ylabel("Score (mean \u00b1 std across trials)", fontsize=11)
+    ax.set_ylabel("Accuracy (mean \u00b1 std across trials)", fontsize=11)
     ax.set_ylim(0, 1.15)
     ax.set_title(
-        f"{model_name.replace('_', ' ').title()}: Per-Fold Metrics\n"
-        f"(averaged over {n_trials} trials, each fold = one held-out song)",
+        f"{model_name.replace('_', ' ').title()}: Per-Song Accuracy\n"
+        f"(averaged over {n_trials} trials)",
         fontsize=12,
     )
-    ax.legend(fontsize=9, loc="lower right")
+    ax.legend(handles=legend_handles, fontsize=9, loc="lower right")
     ax.grid(True, axis="y", alpha=0.3)
 
-    plt.tight_layout()
+    # Footnote explaining LOGO-CV
+    fig.text(
+        0.5, 0.01,
+        "LOGO-CV: each bar = one held-out song (3 clips); "
+        "model trained on remaining 17 songs (51 clips).",
+        ha="center", fontsize=8, style="italic", color="gray",
+    )
+
+    plt.tight_layout(rect=[0, 0.04, 1, 1])
     plt.savefig(
         os.path.join(output_dir, f"piano_{model_name}_per_fold_avg.png"), dpi=150
     )
