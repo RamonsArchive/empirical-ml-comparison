@@ -10,41 +10,41 @@ Target:     Helped = (PeopleRescued > 0)
 --------------------------------------------------
 DATASET OVERVIEW
 --------------------------------------------------
-Total rows: 15
-Participants: 5
+Total rows: 42
+Participants: 14
 Trials per participant: 3
 Conditions: 0=Empty, 1=Single, 2=Multiple
 Groups: 0 (odd ID), 1 (even ID)
-Columns: ['ParticipantID', 'Age', 'Gender', 'Group', 'TrialNumber', 'Condition', 'TimeElapsed', 'PeopleRescued', 'DrownCount', 'TimeNearVictim']
+Columns: ['ParticipantID', 'Age', 'Gender', 'ExperimenterPresent', 'Group', 'TrialNumber', 'Condition', 'TimeElapsed', 'PeopleRescued', 'DrownCount', 'TimeNearVictim']
 
 --------------------------------------------------
 DEMOGRAPHICS
 --------------------------------------------------
-Age: mean=20.6, range=[18, 24]
-  Female: 3 participants
-  Male: 2 participants
+Age: mean=20.1, range=[18, 24]
+  Female: 8 participants
+  Male: 6 participants
 
 --------------------------------------------------
 BINARY TARGET: Helped (PeopleRescued > 0)
 --------------------------------------------------
-Modeling rows (Conditions 1 & 2): 10
-Helped     (1): 4  (40.0%)
-Not Helped (0): 6  (60.0%)
-Class imbalance ratio: 1.50:1
+Modeling rows (Conditions 1 & 2): 28
+Helped     (1): 10  (35.7%)
+Not Helped (0): 18  (64.3%)
+Class imbalance ratio: 1.80:1
 
 --------------------------------------------------
 HELPED RATE BY CONDITION
 --------------------------------------------------
 
 Condition 1 (Single):
-  Helped: 1 / 5 (20.0%)
-  TimeNearVictim: mean=0.061
-  TimeElapsed: mean=83.402
+  Helped: 2 / 14 (14.3%)
+  TimeNearVictim: mean=0.023
+  TimeElapsed: mean=99.405
 
 Condition 2 (Multiple):
-  Helped: 3 / 5 (60.0%)
-  TimeNearVictim: mean=6.434
-  TimeElapsed: mean=139.199
+  Helped: 8 / 14 (57.1%)
+  TimeNearVictim: mean=5.201
+  TimeElapsed: mean=142.013
 
 --------------------------------------------------
 NAIVE BASELINE PERFORMANCE (Conditions 1 & 2)
@@ -52,21 +52,23 @@ NAIVE BASELINE PERFORMANCE (Conditions 1 & 2)
 
 Majority Class Predictor (always predict 0):
   Majority class: 0 (Not Helped)
-  Accuracy:  0.6000
+  Accuracy:  0.6429
   F1 Score:  0.0000  (zero for negative-predicting majority)
-  Minority class rate: 0.4000
+  Minority class rate: 0.3571
 
-A good model must achieve F1 and ROC-AUC above 0.60 baseline accuracy.
+A good model must achieve F1 and ROC-AUC above 0.64 baseline accuracy.
 
 --------------------------------------------------
 FEATURE CORRELATIONS WITH Helped (Conditions 1 & 2)
 --------------------------------------------------
-  PeopleRescued: +0.8538
-  TimeElapsed: +0.6202
-  Age: -0.5117
-  DrownCount: +0.4082
-  Condition: +0.4082
-  Group: -0.2500
-  TimeNearVictim: +0.2301
-  ParticipantID: +0.0948
-  TrialNumber: -0.0000
+  * PeopleRescued shown for reference only — excluded from model (leakage)
+  PeopleRescued: +0.8608  [EXCLUDED FROM MODEL]
+  TimeNearVictim: +0.5545
+  Condition: +0.4472
+  TimeElapsed: +0.1508
+  Group: -0.1491
+  TrialNumber: +0.1491
+  ExperimenterPresent: +0.0667
+  ParticipantID: -0.0277
+  DrownCount: -0.0130
+  Age: +0.0119

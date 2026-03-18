@@ -1,0 +1,329 @@
+{
+  "descriptives": {
+    "n_participants": 14,
+    "n_rows": 28,
+    "age_mean": 20.071428571428573,
+    "age_std": 1.8590438284354556,
+    "age_min": 18,
+    "age_max": 24,
+    "gender_counts": {
+      "Female": 8,
+      "Male": 6
+    },
+    "exp_counts": {
+      "0": 9,
+      "1": 5
+    },
+    "by_condition": {
+      "1": {
+        "n": 14,
+        "rescued_mean": 0.14285714285714285,
+        "rescued_std": 0.3631365196012815,
+        "rescued_median": 0.0,
+        "helped_rate": 0.14285714285714285,
+        "helped_n": 2,
+        "time_near_mean": 0.02293935714285714,
+        "time_near_std": 0.08155973371858966,
+        "time_elapsed_mean": 99.4052152857143
+      },
+      "2": {
+        "n": 14,
+        "rescued_mean": 1.9285714285714286,
+        "rescued_std": 1.9400351192017795,
+        "rescued_median": 1.5,
+        "helped_rate": 0.5714285714285714,
+        "helped_n": 8,
+        "time_near_mean": 5.201406642857143,
+        "time_near_std": 4.764290808069043,
+        "time_elapsed_mean": 142.01330907142858
+      }
+    },
+    "by_experimenter": {
+      "0": {
+        "n": 18,
+        "n_participants": 9,
+        "rescued_mean": 1.0,
+        "rescued_std": 1.6803361008336117,
+        "helped_rate": 0.3333333333333333,
+        "helped_n": 6
+      },
+      "1": {
+        "n": 10,
+        "n_participants": 5,
+        "rescued_mean": 1.1,
+        "rescued_std": 1.66332999331662,
+        "helped_rate": 0.4,
+        "helped_n": 4
+      }
+    },
+    "interaction": {
+      "cond1_exp0": {
+        "n": 9,
+        "rescued_mean": 0.1111111111111111,
+        "rescued_std": 0.3333333333333333,
+        "helped_rate": 0.1111111111111111,
+        "helped_n": 1
+      },
+      "cond1_exp1": {
+        "n": 5,
+        "rescued_mean": 0.2,
+        "rescued_std": 0.44721359549995804,
+        "helped_rate": 0.2,
+        "helped_n": 1
+      },
+      "cond2_exp0": {
+        "n": 9,
+        "rescued_mean": 1.8888888888888888,
+        "rescued_std": 2.0275875100994063,
+        "helped_rate": 0.5555555555555556,
+        "helped_n": 5
+      },
+      "cond2_exp1": {
+        "n": 5,
+        "rescued_mean": 2.0,
+        "rescued_std": 2.0,
+        "helped_rate": 0.6,
+        "helped_n": 3
+      }
+    }
+  },
+  "normality": {
+    "cond_1": {
+      "statistic": 0.42848107310775285,
+      "p_value": 1.7121153687553289e-06,
+      "normal": "False"
+    },
+    "cond_2": {
+      "statistic": 0.7220821659917918,
+      "p_value": 0.000631648844200044,
+      "normal": "False"
+    },
+    "overall": {
+      "statistic": 0.6256858729960919,
+      "p_value": 2.973439071961529e-07,
+      "normal": "False"
+    }
+  },
+  "paired_tests": {
+    "n_paired": 14,
+    "wilcoxon_rescued": {
+      "statistic": 0.0,
+      "p_value": 0.010613156038105713,
+      "n_pairs": 14,
+      "mean_diff": 1.7857142857142858,
+      "median_diff": 1.5,
+      "rank_biserial_r": 0.6829017527333564
+    },
+    "mcnemar_helped": {
+      "statistic": 6.0,
+      "p_value": 0.03125,
+      "table": {
+        "both_helped": 2,
+        "only_single": 0,
+        "only_multiple": 6,
+        "neither": 6
+      },
+      "discordant_pairs": 6,
+      "n_pairs": 14
+    },
+    "paired_ttest_rescued": {
+      "statistic": -3.7015561196038522,
+      "p_value": 0.002662135311435008,
+      "n_pairs": 14
+    }
+  },
+  "between_tests": {
+    "n_absent": 9,
+    "n_present": 5,
+    "mannwhitney_rescued": {
+      "statistic": 85.0,
+      "p_value": 0.7998461056624733,
+      "n_absent": 18,
+      "n_present": 10,
+      "rank_biserial_r": 0.05555555555555558
+    },
+    "fisher_helped": {
+      "odds_ratio": 1.3333333333333333,
+      "p_value": 1.0,
+      "table": {
+        "absent_not_helped": 12,
+        "absent_helped": 6,
+        "present_not_helped": 6,
+        "present_helped": 4
+      }
+    }
+  },
+  "effect_sizes": {
+    "condition_rescued_paired_d": {
+      "value": 0.9892824855338601,
+      "interpretation": "large",
+      "label": "Condition effect\n(Multiple vs Single)\nPeopleRescued (paired)"
+    },
+    "condition_rescued_d": {
+      "value": 1.2794978110173332,
+      "interpretation": "large",
+      "label": "Condition effect\n(Multiple vs Single)\nPeopleRescued"
+    },
+    "experimenter_rescued_d": {
+      "value": 0.0597204277651745,
+      "interpretation": "negligible",
+      "label": "Experimenter Present\nvs Absent\nPeopleRescued"
+    },
+    "condition_helped_rates": {
+      "rate_single": 0.14285714285714285,
+      "rate_multiple": 0.5714285714285714,
+      "difference": 0.42857142857142855,
+      "label": "Condition effect\non Helping Rate"
+    }
+  },
+  "lmm_coefs": {
+    "simple": {
+      "title": "Mixed LM: Condition Only",
+      "terms": [
+        "Intercept",
+        "IsMultiple"
+      ],
+      "coefs": [
+        0.1428571428571429,
+        1.7857142857142856
+      ],
+      "lower_ci": [
+        -0.5882093627115721,
+        0.8401885470202459,
+        -0.5606619708135363
+      ],
+      "upper_ci": [
+        0.8739236484258579,
+        2.7312400244083253,
+        0.9519233729782237
+      ],
+      "pvalues": [
+        0.7017234321907501,
+        0.00021426418383283953,
+        0.6121652616459977
+      ]
+    },
+    "full": {
+      "title": "Mixed LM: Full Model",
+      "terms": [
+        "Intercept",
+        "IsMultiple",
+        "ExperimenterPresent",
+        "IsMultiple:ExperimenterPresent"
+      ],
+      "coefs": [
+        0.11111111111111148,
+        1.7777777777777766,
+        0.08888888888888886,
+        0.022222222222222775
+      ],
+      "lower_ci": [
+        -0.837309712956291,
+        0.5503627284774648,
+        -1.4981226947705168,
+        -2.0316359932096226,
+        -0.5913366170595105
+      ],
+      "upper_ci": [
+        1.059531935178514,
+        3.0051928270780883,
+        1.6759004725482944,
+        2.076080437654068,
+        0.9795837534360199
+      ],
+      "pvalues": [
+        0.8183892058612883,
+        0.004528415701813937,
+        0.9125854074405692,
+        0.9830810802974047,
+        0.6281035645717449
+      ]
+    },
+    "covariate": {
+      "title": "Mixed LM: With Covariates",
+      "terms": [
+        "Intercept",
+        "IsMultiple",
+        "ExperimenterPresent",
+        "IsMultiple:ExperimenterPresent",
+        "baseline_TimeElapsed",
+        "baseline_DrownCount"
+      ],
+      "coefs": [
+        1.6663758668188524,
+        1.7777777777777783,
+        -0.15209660472591985,
+        0.02222222222222117,
+        -0.012459896835682103,
+        0.1769170961252156
+      ],
+      "lower_ci": [
+        -0.6031051887441106,
+        0.5503667088666724,
+        -1.6433595659369915,
+        -2.0316293327445463,
+        -0.03548922290790213,
+        -1.7587029253280781,
+        -0.5973904191244681
+      ],
+      "upper_ci": [
+        3.9358569223818156,
+        3.0051888466888843,
+        1.339166356485152,
+        2.076073777188989,
+        0.010569429236537921,
+        2.1125371175785093,
+        0.6399686679586809
+      ],
+      "pvalues": [
+        0.1501188846448268,
+        0.004528285064742251,
+        0.8415585798802192,
+        0.9830810254390194,
+        0.28894979401638077,
+        0.8578260845833482,
+        0.9462286357299656
+      ]
+    },
+    "icc": 0.1625657288405943
+  },
+  "gee_coefs": {
+    "title": "GEE Binomial: Helped",
+    "terms": [
+      "Intercept",
+      "IsMultiple",
+      "ExperimenterPresent",
+      "IsMultiple:ExperimenterPresent"
+    ],
+    "coefs": [
+      -2.079441541679836,
+      2.302585092994046,
+      0.693147180559945,
+      -0.510825623765991
+    ],
+    "lower_ci": [
+      -4.158297278204359,
+      0.22372935646952374,
+      -2.327360177343456,
+      -3.531332981669391
+    ],
+    "upper_ci": [
+      -0.000585805155313146,
+      4.381440829518568,
+      3.713654538463346,
+      2.509681734137409
+    ],
+    "pvalues": [
+      0.04993547622854486,
+      0.029938880182467726,
+      0.6528739242891467,
+      0.7402914354111745
+    ]
+  },
+  "gee_odds_ratios": {
+    "Intercept": 0.12499999999999997,
+    "IsMultiple": 10.000000000000002,
+    "ExperimenterPresent": 1.9999999999999993,
+    "IsMultiple:ExperimenterPresent": 0.5999999999999998
+  }
+}

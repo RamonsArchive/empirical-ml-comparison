@@ -5,6 +5,7 @@ from experiments.thyroid_cancer import main as thyroid_cancer_main
 from experiments.wine import main as wine_main
 from experiments.rescue import main as rescue_main
 from experiments.rescue_classification import main as rescue_classification_main
+from experiments.rescue_inferential import main as rescue_inferential_main
 from experiments.piano import main as piano_main
 
 
@@ -43,6 +44,11 @@ def main():
     print("RUNNING RESCUE CLASSIFICATION EXPERIMENT")
     print("=" * 80)
     rescue_classification_main()
+
+    print("\n" + "=" * 80)
+    print("RUNNING RESCUE INFERENTIAL STATISTICS")
+    print("=" * 80)
+    rescue_inferential_main()
 
     # print("\n" + "=" * 80)
     # print("RUNNING PIANO EMOTION CLASSIFICATION EXPERIMENT")

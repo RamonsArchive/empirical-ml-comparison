@@ -1,0 +1,334 @@
+================================================================================
+RESCUE EXPERIMENT - INFERENTIAL STATISTICS REPORT
+================================================================================
+Generated: 2026-03-18 01:53:59
+
+================================================================================
+1. STUDY OVERVIEW
+================================================================================
+
+RESEARCH QUESTIONS
+  RQ1: Does condition (single vs multiple victims in a stormy VR ocean)
+       affect prosocial rescue behavior?
+       Hypothesis: Diffusion of responsibility - participants rescue fewer
+       people when multiple victims are present.
+  RQ2: Does the experimenter's physical presence in the room moderate
+       the rescue/helping behavior across conditions?
+
+STUDY DESIGN
+  - Within-subjects factor: Condition (0=Baseline, 1=Single, 2=Multiple)
+  - Between-subjects factor: ExperimenterPresent (0=Absent, 1=Present)
+  - Dependent variables:
+      PeopleRescued (count): Number of virtual victims rescued
+      Helped (binary): Whether participant rescued at least one victim
+  - Counterbalanced across 2 groups
+  - 3 trials per participant (one per condition)
+  - VR Environment: Unreal Engine 5, stormy ocean weather
+
+WHY VR?
+  Virtual Reality provides a uniquely controlled environment for studying
+  prosocial behavior in emergency scenarios. Key methodological advantages:
+  1. Ecological validity: Immersive VR generates genuine emotional and
+     behavioral responses comparable to real-world scenarios (Slater, 2009)
+  2. Experimental control: Precise manipulation of victim count, weather
+     conditions, and environmental factors impossible in field studies
+  3. Ethical advantage: Study dangerous emergency scenarios (drowning)
+     without any real risk to participants
+  4. Measurable behavioral outcomes: Exact timing, proximity, and rescue
+     counts captured automatically by the simulation
+  5. Reproducibility: Identical stimulus presentation across participants
+
+================================================================================
+2. SAMPLE CHARACTERISTICS
+================================================================================
+
+  Participants:    14
+  Total rows:      28 (Conditions 1 & 2 only)
+  Age:             M=20.1, SD=1.9, range=[18, 24]
+
+  Gender:
+    Female: 8 (57%)
+    Male: 6 (43%)
+
+  Experimenter Presence:
+    Absent: 9 participants (64%)
+    Present: 5 participants (36%)
+
+================================================================================
+3. DESCRIPTIVE STATISTICS
+================================================================================
+
+  BY CONDITION (Conditions 1 & 2 only):
+  Condition          N    Rescued M(SD)   Median   Helped   TimeNear M
+  ----------------------------------------------------------------------
+  Single (1)        14   0.14 (0.36)      0.0     2/14 (14%)       0.0s
+  Multiple (2)      14   1.93 (1.94)      1.5     8/14 (57%)       5.2s
+
+  BY EXPERIMENTER PRESENCE:
+  Experimenter     N(part)  N(obs)    Rescued M(SD)     Helped
+  ------------------------------------------------------------
+  Absent                 9      18   1.00 (1.68)     6/18 (33%)
+  Present                5      10   1.10 (1.66)     4/10 (40%)
+
+  CONDITION x EXPERIMENTER PRESENCE:
+  Condition    Experimenter    N    Rescued M(SD)     Helped
+  ------------------------------------------------------------
+  Single (1)   Absent          9   0.11 (0.33)     1/9 (11%)
+  Single (1)   Present         5   0.20 (0.45)     1/5 (20%)
+  Multiple (2) Absent          9   1.89 (2.03)     5/9 (56%)
+  Multiple (2) Present         5   2.00 (2.00)     3/5 (60%)
+
+================================================================================
+4. ASSUMPTION CHECKS
+================================================================================
+
+  Shapiro-Wilk Normality Test (PeopleRescued):
+    Condition 1: W=0.4285, p=0.0000 -> NOT NORMAL
+    Condition 2: W=0.7221, p=0.0006 -> NOT NORMAL
+    Overall: W=0.6257, p=0.0000 -> NOT NORMAL
+
+  Conclusion: Data deviates from normality. Non-parametric tests are primary.
+  Parametric mixed-effects models reported as supplementary analysis.
+
+================================================================================
+5. RESULTS - RQ1: CONDITION EFFECT (Single vs Multiple Victims)
+================================================================================
+
+  Paired participants: 14
+
+  Wilcoxon Signed-Rank Test (PeopleRescued):
+    W = 0.0, p = 0.0106  [SIGNIFICANT]
+    Mean difference (Multiple - Single): 1.786
+    Median difference: 1.500
+    Rank-biserial r = 0.683
+
+  Paired t-test (PeopleRescued, for comparison):
+    t(13) = -3.702, p = 0.0027  [SIGNIFICANT]
+
+  McNemar's Test (Helped - binary):
+    chi2 = 6.000, p = 0.0312  [SIGNIFICANT]
+    Contingency table:
+      Both helped:        2
+      Only Single helped: 0
+      Only Multiple helped: 6
+      Neither helped:     6
+    Discordant pairs: 6
+
+================================================================================
+6. RESULTS - RQ2: EXPERIMENTER PRESENCE EFFECT
+================================================================================
+
+  Experimenter Absent:  9 participants
+  Experimenter Present: 5 participants
+
+  Mann-Whitney U Test (PeopleRescued):
+    U = 85.0, p = 0.7998  [NOT SIGNIFICANT]
+    Rank-biserial r = 0.056
+
+  Fisher's Exact Test (Helped):
+    Odds Ratio = 1.333, p = 1.0000  [NOT SIGNIFICANT]
+    2x2 table:
+      Absent  - Not Helped: 12, Helped: 6
+      Present - Not Helped: 6, Helped: 4
+
+================================================================================
+7. MIXED-EFFECTS MODEL RESULTS
+================================================================================
+
+  --- Model 1 (Simple): PeopleRescued ~ IsMultiple + (1|ParticipantID) ---
+
+           Mixed Linear Model Regression Results
+===========================================================
+Model:            MixedLM Dependent Variable: PeopleRescued
+No. Observations: 28      Method:             REML         
+No. Groups:       14      Scale:              1.6291       
+Min. group size:  2       Log-Likelihood:     -48.0222     
+Max. group size:  2       Converged:          Yes          
+Mean group size:  2.0                                      
+------------------------------------------------------------
+               Coef.  Std.Err.    z    P>|z|  [0.025  0.975]
+------------------------------------------------------------
+Intercept      0.143     0.373  0.383  0.702  -0.588   0.874
+IsMultiple     1.786     0.482  3.702  0.000   0.840   2.731
+Group Var      0.319     0.493                              
+===========================================================
+
+
+  --- Model 2 (Full): PeopleRescued ~ IsMultiple * ExperimenterPresent + (1|ParticipantID) ---
+
+                 Mixed Linear Model Regression Results
+=======================================================================
+Model:                MixedLM     Dependent Variable:     PeopleRescued
+No. Observations:     28          Method:                 REML         
+No. Groups:           14          Scale:                  1.7648       
+Min. group size:      2           Log-Likelihood:         -46.6460     
+Max. group size:      2           Converged:              Yes          
+Mean group size:      2.0                                              
+-----------------------------------------------------------------------
+                               Coef. Std.Err.   z   P>|z| [0.025 0.975]
+-----------------------------------------------------------------------
+Intercept                      0.111    0.484 0.230 0.818 -0.837  1.060
+IsMultiple                     1.778    0.626 2.839 0.005  0.550  3.005
+ExperimenterPresent            0.089    0.810 0.110 0.913 -1.498  1.676
+IsMultiple:ExperimenterPresent 0.022    1.048 0.021 0.983 -2.032  2.076
+Group Var                      0.343    0.532                          
+=======================================================================
+
+
+  --- Model 3 (With Covariates): + baseline_TimeElapsed + baseline_DrownCount ---
+
+                  Mixed Linear Model Regression Results
+=========================================================================
+Model:                  MixedLM     Dependent Variable:     PeopleRescued
+No. Observations:       28          Method:                 REML         
+No. Groups:             14          Scale:                  1.7648       
+Min. group size:        2           Log-Likelihood:         -47.5501     
+Max. group size:        2           Converged:              Yes          
+Mean group size:        2.0                                              
+-------------------------------------------------------------------------
+                               Coef.  Std.Err.   z    P>|z| [0.025 0.975]
+-------------------------------------------------------------------------
+Intercept                       1.666    1.158  1.439 0.150 -0.603  3.936
+IsMultiple                      1.778    0.626  2.839 0.005  0.550  3.005
+ExperimenterPresent            -0.152    0.761 -0.200 0.842 -1.643  1.339
+IsMultiple:ExperimenterPresent  0.022    1.048  0.021 0.983 -2.032  2.076
+baseline_TimeElapsed           -0.012    0.012 -1.060 0.289 -0.035  0.011
+baseline_DrownCount             0.177    0.988  0.179 0.858 -1.759  2.113
+Group Var                       0.038    0.419                           
+=========================================================================
+
+
+  RANDOM EFFECTS:
+    Participant variance (tau^2): 0.3426
+    Residual variance (sigma^2):  1.7648
+    ICC (Intraclass Correlation):  0.1626
+    -> 16% of variance in PeopleRescued is between participants
+    -> Mixed model justified (substantial clustering)
+
+  KEY COEFFICIENT INTERPRETATION (Full Model):
+    Intercept = 0.111 (p=0.8184)
+      Expected PeopleRescued for Single condition, Experimenter Absent
+    IsMultiple = 1.778 (p=0.0045)*
+      Change in PeopleRescued from Single to Multiple (Exp Absent)
+    ExperimenterPresent = 0.089 (p=0.9126)
+      Change in PeopleRescued when experimenter is present (Single condition)
+    IsMultiple:ExperimenterPresent = 0.022 (p=0.9831)
+      Additional change for Multiple + Experimenter Present (interaction)
+
+  ----------------------------------------------------------------------
+  GEE BINOMIAL MODEL: Helped ~ IsMultiple * ExperimenterPresent
+  ----------------------------------------------------------------------
+
+                               GEE Regression Results                              
+===================================================================================
+Dep. Variable:                      Helped   No. Observations:                   28
+Model:                                 GEE   No. clusters:                       14
+Method:                        Generalized   Min. cluster size:                   2
+                      Estimating Equations   Max. cluster size:                   2
+Family:                           Binomial   Mean cluster size:                 2.0
+Dependence structure:         Exchangeable   Num. iterations:                     2
+Date:                     Wed, 18 Mar 2026   Scale:                           1.000
+Covariance type:                    robust   Time:                         01:53:59
+==================================================================================================
+                                     coef    std err          z      P>|z|      [0.025      0.975]
+--------------------------------------------------------------------------------------------------
+Intercept                         -2.0794      1.061     -1.961      0.050      -4.158      -0.001
+IsMultiple                         2.3026      1.061      2.171      0.030       0.224       4.381
+ExperimenterPresent                0.6931      1.541      0.450      0.653      -2.327       3.714
+IsMultiple:ExperimenterPresent    -0.5108      1.541     -0.331      0.740      -3.531       2.510
+==============================================================================
+Skew:                          0.3134   Kurtosis:                      -0.9060
+Centered skew:                 0.0000   Centered kurtosis:             -1.9096
+==============================================================================
+
+  ODDS RATIOS (exponentiated coefficients):
+    Intercept: OR = 0.125
+    IsMultiple: OR = 10.000
+    ExperimenterPresent: OR = 2.000
+    IsMultiple:ExperimenterPresent: OR = 0.600
+
+  CAVEAT: With only ~14 clusters (participants), GEE sandwich standard
+  errors may be unreliable. These results should be interpreted with caution.
+  Non-parametric tests above provide more robust inference for this sample size.
+
+================================================================================
+8. EFFECT SIZES SUMMARY
+================================================================================
+
+  Condition effect (Multiple vs Single) PeopleRescued (paired):
+    Cohen's d = 0.989 (large)
+
+  Condition effect (Multiple vs Single) PeopleRescued:
+    Cohen's d = 1.279 (large)
+
+  Experimenter Present vs Absent PeopleRescued:
+    Cohen's d = 0.060 (negligible)
+
+  Condition effect on Helping Rate:
+    Single rate: 14%
+    Multiple rate: 57%
+    Difference: +43%
+
+================================================================================
+9. KEY FINDINGS & INTERPRETATION
+================================================================================
+
+  FINDING 1 - CONDITION EFFECT:
+    Participants rescued significantly more people in the Multiple condition
+    (M=1.93, SD=1.94) compared to Single
+    (M=0.14, SD=0.36).
+    Helping rate: Multiple=57% vs Single=14%
+    This difference was statistically significant (Wilcoxon p=0.0106).
+
+    NOTE: This pattern is OPPOSITE to the diffusion of responsibility
+    hypothesis. Rather than helping less with more victims, participants
+    helped MORE. Possible explanations:
+    - Greater perceived urgency with multiple victims in distress
+    - More opportunities for successful rescue (4 victims vs 1)
+    - Stronger emotional activation from the multi-victim scenario
+
+  FINDING 2 - EXPERIMENTER PRESENCE:
+    Experimenter Absent:  M=1.00 rescued, 33% helped
+    Experimenter Present: M=1.10 rescued, 40% helped
+    Not statistically significant (Mann-Whitney p=0.7998).
+
+  FINDING 3 - INTERACTION:
+    The Condition x ExperimenterPresent interaction reveals whether
+    the condition effect differs based on experimenter presence.
+    Non-significant interaction (b=0.022, p=0.9831): the condition
+    effect is similar regardless of experimenter presence.
+
+================================================================================
+10. METHODOLOGICAL NOTES
+================================================================================
+
+  ML vs INFERENTIAL STATISTICS:
+  This experiment uses BOTH approaches for complementary insight:
+  - Inferential statistics (this report): Answer causal/mechanistic questions
+    about condition and experimenter effects. Appropriate for the repeated
+    measures design with small N (~14 participants).
+  - ML pipeline (rescue_classification.py): Provides prediction performance
+    and feature importance. Useful for identifying which behavioral features
+    best predict helping, but limited by small sample size.
+
+  For N=14 with 3 repeated measures per participant, inferential statistics
+  are the PRIMARY analysis. The mixed-effects model properly handles the
+  nested structure (trials within participants). ML results are SUPPLEMENTARY.
+
+  LIMITATIONS:
+  - Small sample (N=14) limits statistical power
+  - Unbalanced ExperimenterPresent groups ({0: 9, 1: 5})
+  - GEE requires ~40+ clusters for reliable sandwich SE; our 14 is insufficient
+  - Within-subjects design with only 2 victim conditions limits model complexity
+  - Non-parametric tests are preferred given non-normal distributions
+
+  RECOMMENDATIONS:
+  - Report non-parametric tests as primary results
+  - Report mixed-effects models as confirmatory/supplementary
+  - Include effect sizes (Cohen's d) alongside p-values
+  - Emphasize the unexpected direction of the condition effect
+  - Discuss experimenter presence as a social desirability confound
+
+================================================================================
+END OF REPORT
+================================================================================
