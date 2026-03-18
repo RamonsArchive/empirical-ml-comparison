@@ -1,4 +1,4 @@
-﻿ParticipantID,Age,Gender,Group,TrialNumber,Condition,TimeElapsed,PeopleRescued,DidDrown,DrownCount,HealthRemaining,AttemptedRescue,TimeNearVictim
-50411,20,Female,0,1,0,182.323829,0,true,1,0.240257,false,0.0
-50411,20,Female,0,2,1,121.227058,0,false,0,0.494847,false,0.0
-50411,20,Female,0,3,2,120.442305,0,false,0,0.498117,true,13.155069
+ParticipantID,Age,Gender,ExperimenterPresent,Group,TrialNumber,Condition,TimeElapsed,PeopleRescued,DidDrown,DrownCount,HealthRemaining,AttemptedRescue,TimeNearVictim
+50411,20,Female,1,0,1,0,182.323829,0,True,1,0.240257,False,0.0
+50411,20,Female,1,0,2,1,121.227058,0,False,0,0.494847,False,0.0
+50411,20,Female,1,0,3,2,120.442305,0,False,0,0.498117,True,13.155069

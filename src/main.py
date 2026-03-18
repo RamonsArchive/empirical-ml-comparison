@@ -39,15 +39,15 @@ def main():
     # print("=" * 80)
     # rescue_main()
 
-    # print("\n" + "=" * 80)
-    # print("RUNNING RESCUE CLASSIFICATION EXPERIMENT")
-    # print("=" * 80)
-    # rescue_classification_main()
-
     print("\n" + "=" * 80)
-    print("RUNNING PIANO EMOTION CLASSIFICATION EXPERIMENT")
+    print("RUNNING RESCUE CLASSIFICATION EXPERIMENT")
     print("=" * 80)
-    piano_main()
+    rescue_classification_main()
+
+    # print("\n" + "=" * 80)
+    # print("RUNNING PIANO EMOTION CLASSIFICATION EXPERIMENT")
+    # print("=" * 80)
+    # piano_main()
 
 
 if __name__ == "__main__":
