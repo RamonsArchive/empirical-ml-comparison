@@ -275,7 +275,37 @@ def run_boosting_experiment(
         print(f"Test MAE : {mae:.4f}")
 
     # =========================
-    # 6. Get feature importances
+    # 6. Evaluate on TRAIN set (for overfitting detection)
+    # =========================
+    y_train_pred = best_estimator.predict(X_train)
+
+    train_metrics = {}
+    if problem_type == "classification":
+        n_classes = len(np.unique(y_train))
+        avg = "weighted" if n_classes > 2 else "binary"
+        train_metrics["accuracy"] = accuracy_score(y_train, y_train_pred)
+        train_metrics["precision"] = precision_score(y_train, y_train_pred, average=avg, zero_division=0)
+        train_metrics["recall"] = recall_score(y_train, y_train_pred, average=avg, zero_division=0)
+        train_metrics["f1"] = f1_score(y_train, y_train_pred, average=avg, zero_division=0)
+        # Train ROC-AUC
+        try:
+            if hasattr(best_estimator.named_steps["model"], "predict_proba"):
+                y_train_proba = best_estimator.predict_proba(X_train)
+                if n_classes == 2:
+                    train_metrics["roc_auc"] = roc_auc_score(y_train, y_train_proba[:, 1])
+                else:
+                    train_metrics["roc_auc"] = roc_auc_score(y_train, y_train_proba, multi_class="ovr")
+        except Exception:
+            train_metrics["roc_auc"] = None
+    else:
+        train_mse = mean_squared_error(y_train, y_train_pred)
+        train_metrics["mse"] = train_mse
+        train_metrics["rmse"] = np.sqrt(train_mse)
+        train_metrics["mae"] = mean_absolute_error(y_train, y_train_pred)
+        train_metrics["r2"] = r2_score(y_train, y_train_pred)
+
+    # =========================
+    # 7. Get feature importances
     # =========================
     xgb_model = best_estimator.named_steps["model"]
     feature_importances = xgb_model.feature_importances_
@@ -287,7 +317,7 @@ def run_boosting_experiment(
         feature_names = None
 
     # =========================
-    # 7. Pack results
+    # 8. Pack results
     # =========================
     results = {
         "model": best_estimator,
@@ -296,6 +326,7 @@ def run_boosting_experiment(
         "cv_train_score": float(cv_train_score),
         "cv_val_score": float(cv_val_score),
         "grid_search": grid_search,
+        "train_metrics": train_metrics,
         "test_metrics": test_metrics,
         "y_test": y_test,
         "y_pred": y_pred,

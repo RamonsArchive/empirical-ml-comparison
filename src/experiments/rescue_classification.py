@@ -62,7 +62,7 @@ TARGET_COL = "Helped"
 def generate_boosting(train_df, test_df, random_state, predictors, target_col, cv):
     """XGBoost classification with LOOCV."""
     param_grid = {
-        "model__n_estimators": [50, 100, 200],
+        "model__n_estimators": [10, 15, 25, 50],
         "model__learning_rate": [0.05, 0.1, 0.01],
         "model__max_depth": [3, 5, 7, 10],
         "model__subsample": [0.8, 1.0],
@@ -84,7 +84,7 @@ def generate_boosting(train_df, test_df, random_state, predictors, target_col, c
 def generate_random_forest(train_df, test_df, random_state, predictors, target_col, cv):
     """Random Forest classification with LOOCV."""
     param_grid = {
-        "model__n_estimators": [100, 200, 300],
+        "model__n_estimators": [10, 15, 25, 50],
         "model__max_depth": [5, 10, None],
         "model__min_samples_split": [2, 5, 10],
         "model__min_samples_leaf": [1, 2, 5],
@@ -106,7 +106,7 @@ def generate_random_forest(train_df, test_df, random_state, predictors, target_c
 def generate_neural_network(train_df, test_df, random_state, predictors, target_col, cv):
     """Neural Network (MLP) classification with LOOCV."""
     param_grid = {
-        "model__hidden_layer_sizes": [(16,), (32,)],
+        "model__hidden_layer_sizes": [(8,), (16,), (32,), (16, 8)],
         "model__alpha": [0.01, 0.1, 0.001],
         "model__learning_rate_init": [0.01, 0.05, 0.001],
         "model__batch_size": ["auto", 16, 32],
@@ -241,6 +241,7 @@ def main():
                 "cv_train_score": boosting_result["cv_train_score"],
                 "cv_val_score": boosting_result["cv_val_score"],
                 "cv_scoring": boosting_result["cv_scoring"],
+                "train_metrics": boosting_result.get("train_metrics", {}),
                 "test_metrics": {
                     "accuracy": boosting_result["test_metrics"]["accuracy"],
                     "precision": boosting_result["test_metrics"]["precision"],
@@ -276,6 +277,7 @@ def main():
                 "cv_train_score": rf_result["cv_train_score"],
                 "cv_val_score": rf_result["cv_val_score"],
                 "cv_scoring": rf_result["cv_scoring"],
+                "train_metrics": rf_result.get("train_metrics", {}),
                 "test_metrics": {
                     "accuracy": rf_result["test_metrics"]["accuracy"],
                     "precision": rf_result["test_metrics"]["precision"],
@@ -311,6 +313,7 @@ def main():
                 "cv_train_score": nn_result["cv_train_score"],
                 "cv_val_score": nn_result["cv_val_score"],
                 "cv_scoring": nn_result["cv_scoring"],
+                "train_metrics": nn_result.get("train_metrics", {}),
                 "test_metrics": {
                     "accuracy": nn_result["test_metrics"]["accuracy"],
                     "precision": nn_result["test_metrics"]["precision"],

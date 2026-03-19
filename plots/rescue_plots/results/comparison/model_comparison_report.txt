@@ -11,32 +11,45 @@ Modeled Data:   Conditions 1 (Single) & 2 (Multiple) only
 Predictors:     Age, Gender, Group, Condition, TimeElapsed, DrownCount,
                 TimeNearVictim, baseline_TimeElapsed, baseline_DrownCount
 Target:         PeopleRescued (integer 0-4)
-Splits:         50_50, 80_20
+Splits:         20_80, 50_50, 80_20
 Trials:         3 per split with different random seeds
 
 --------------------------------------------------------------------------------
 NAIVE BASELINE (Mean Predictor)
 --------------------------------------------------------------------------------
+  20_80: mean = 1.00, baseline RMSE = 1.6151
+  50_50: mean = 1.21, baseline RMSE = 1.7800
+  80_20: mean = 0.83, baseline RMSE = 1.4625
+
 A model that always predicts the mean PeopleRescued.
-Any useful model must achieve RMSE below this and R2 above 0.
+Any useful model must achieve RMSE below baseline and R2 > 0.
 
 --------------------------------------------------------------------------------
 AVERAGE TEST RMSE BY MODEL AND SPLIT (averaged over 3 trials)
 --------------------------------------------------------------------------------
-Model               50_50          80_20          Overall        
+Model               20_80          50_50          80_20          Overall        
 --------------------------------------------------------------------------------
-boosting            1.7370         1.4306         1.5838
-random_forest       1.7160         1.4050         1.5605
-neural_network      3.6128         1.3396         2.4762
+boosting            1.7031         1.5505         1.4843         1.5793
+random_forest       1.6580         1.4880         1.3545         1.5001
+neural_network      1.7452         1.9203         1.5381         1.7345
 
 --------------------------------------------------------------------------------
 AVERAGE TEST R2 BY MODEL AND SPLIT (averaged over 3 trials)
 --------------------------------------------------------------------------------
-Model               50_50          80_20          Overall        
+Model               20_80          50_50          80_20          Overall        
 --------------------------------------------------------------------------------
-boosting            -1.0274        -0.0009        -0.5142
-random_forest       -1.0167        0.3053         -0.3557
-neural_network      -8.2550        -0.2514        -4.2532
+boosting            -0.0669        0.1805         0.0973         0.0703
+random_forest       -0.0295        0.2411         0.3050         0.1722
+neural_network      -0.1421        -0.2955        0.0667         -0.1236
+
+--------------------------------------------------------------------------------
+OVERFITTING ANALYSIS: TRAIN RMSE vs TEST RMSE (averaged over 3 trials)
+--------------------------------------------------------------------------------
+Model               Train(20_80) Test(20_80)  Gap       Train(50_50) Test(50_50)  Gap       Train(80_20) Test(80_20)  Gap       
+--------------------------------------------------------------------------------
+boosting            0.6650       1.7031       +1.0381   0.8055       1.5505       +0.7449   0.6128       1.4843       +0.8714   
+random_forest       0.8479       1.6580       +0.8100   0.6049       1.4880       +0.8830   0.4721       1.3545       +0.8823   
+neural_network      0.0684       1.7452       +1.6768   0.0175       1.9203       +1.9028   0.0454       1.5381       +1.4927   
 
 --------------------------------------------------------------------------------
 INTERPRETATION
@@ -45,10 +58,22 @@ At least one model achieved positive R2, indicating predictive
 value above the naive mean predictor.
 
 --------------------------------------------------------------------------------
-BEST SINGLE TRIAL (for reference only)
+BEST MODEL (by averaged RMSE across ALL trials, not cherry-picked)
 --------------------------------------------------------------------------------
-Model: random_forest
-Split: 80_20
-RMSE:  0.2900
-R2:    0.9159
-MAE:   0.2100
+Winner:     random_forest
+
+Averaged Test Metrics (mean +/- std over 9 trials):
+  R2:   0.1722 +/- 0.2319
+  RMSE: 1.5001 +/- 0.2491
+  MAE:  1.0903 +/- 0.1493
+
+Averaged Train RMSE: 0.6417
+Train-Test RMSE Gap: +0.8585
+
+--------------------------------------------------------------------------------
+BEST SINGLE TRIAL (for reference only - do NOT report this)
+--------------------------------------------------------------------------------
+Model:    neural_network
+Split:    80_20
+Test RMSE: 1.1389
+NOTE: This is cherry-picked. Use averaged metrics above for reporting.

@@ -3,13 +3,31 @@ RESCUE CLASSIFICATION - BOOSTING RESULTS
 ======================================================================
 
 ----------------------------------------------------------------------
-PERFORMANCE BY SPLIT (averaged over 3 trials)
+TRAIN PERFORMANCE BY SPLIT (averaged over 3 trials)
+----------------------------------------------------------------------
+
+Split      Train Acc    Train F1    
+----------------------------------------
+50_50      0.9286       0.9024      
+80_20      0.9242       0.8755      
+
+----------------------------------------------------------------------
+TEST PERFORMANCE BY SPLIT (averaged over 3 trials)
 ----------------------------------------------------------------------
 
 Split      Accuracy     Precision    Recall       F1           ROC-AUC     
 ----------------------------------------------------------------------
-50_50      0.8095       0.8889       0.6000       0.6829       0.8407      
-80_20      0.7778       0.4444       0.6667       0.5333       0.8542      
+50_50      0.8095       0.8889       0.6000       0.6829       0.8333      
+80_20      0.7778       0.4444       0.6667       0.5333       0.8125      
+
+----------------------------------------------------------------------
+OVERFITTING ANALYSIS (Train - Test gap, averaged over 3 trials)
+----------------------------------------------------------------------
+
+Split      Train F1     Test F1      Gap          Status         
+------------------------------------------------------------
+50_50      0.9024       0.6829       0.2195++++++ MODERATE OVERFIT
+80_20      0.8755       0.5333       0.3421++++++ SEVERE OVERFIT 
 
 ----------------------------------------------------------------------
 BEST MODEL (highest F1)
@@ -20,18 +38,25 @@ Trial: 1
 Best Parameters:
   model__learning_rate: 0.05
   model__max_depth: 3
-  model__n_estimators: 50
+  model__n_estimators: 25
   model__reg_lambda: 1
   model__subsample: 0.8
+
+Train Metrics:
+  Accuracy:  1.0000
+  Precision: 1.0000
+  Recall:    1.0000
+  F1:        1.0000
 
 Test Metrics:
   Accuracy:  0.8333
   Precision: 0.6667
   Recall:    1.0000
   F1:        0.8000
-  ROC-AUC:   0.9375
+  ROC-AUC:   0.8125
 
 ----------------------------------------------------------------------
 INTERPRETATION
 ----------------------------------------------------------------------
-Model Quality: GOOD (F1 = 0.8000)
+Model Quality: GOOD (Test F1 = 0.8000)
+WARNING: Train F1 (1.0000) >> Test F1 (0.8000), gap = +0.2000. Model is overfitting.

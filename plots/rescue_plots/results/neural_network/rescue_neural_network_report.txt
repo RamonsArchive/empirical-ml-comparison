@@ -2,36 +2,63 @@
 RESCUE EXPERIMENT - NEURAL_NETWORK RESULTS
 ======================================================================
 
---------------------------------------------------
-PERFORMANCE BY SPLIT (averaged over 3 trials)
---------------------------------------------------
-
-Split      CV Train     CV Val       Test R2      Test RMSE    Test MAE    
 ----------------------------------------------------------------------
-50_50      -0.0019      -0.6159      -8.2550      3.6128       2.9158      
-80_20      -0.0050      -6.9319      -0.2514      1.3396       1.2070      
+TRAIN PERFORMANCE BY SPLIT (averaged over 3 trials)
+----------------------------------------------------------------------
 
+Split      Train R2     Train RMSE   CV Train     CV Val      
+------------------------------------------------------------
+20_80      0.9972       0.0684       -0.0056      -1.3185     
+50_50      0.9998       0.0175       -0.0007      -0.7031     
+80_20      0.9989       0.0454       -0.0142      -1.8629     
+
+----------------------------------------------------------------------
+TEST PERFORMANCE BY SPLIT (averaged over 3 trials)
+----------------------------------------------------------------------
+
+Split      Test R2      Test RMSE    Test MAE    
 --------------------------------------------------
+20_80      -0.1421      1.7452       1.3036      
+50_50      -0.2955      1.9203       1.4881      
+80_20      0.0667       1.5381       1.1903      
+
+----------------------------------------------------------------------
+OVERFITTING ANALYSIS (Train - Test gap, averaged over 3 trials)
+----------------------------------------------------------------------
+
+Split      Train RMSE   Test RMSE    Gap          Status         
+------------------------------------------------------------
+20_80      0.0684       1.7452       1.6768++++++ SEVERE OVERFIT 
+50_50      0.0175       1.9203       1.9028++++++ SEVERE OVERFIT 
+80_20      0.0454       1.5381       1.4927++++++ SEVERE OVERFIT 
+
+----------------------------------------------------------------------
 BEST MODEL (lowest RMSE)
---------------------------------------------------
+----------------------------------------------------------------------
 Split: 80_20
-Trial: 1
+Trial: 3
 
 Best Parameters:
   model__alpha: 0.001
   model__batch_size: auto
   model__early_stopping: False
-  model__hidden_layer_sizes: (16,)
-  model__learning_rate_init: 0.001
+  model__hidden_layer_sizes: (16, 8)
+  model__learning_rate_init: 0.05
+
+Train Metrics:
+  R2:   0.9999
+  RMSE: 0.0176
+  MAE:  0.0120
 
 Test Metrics:
-  R2:   0.0000
-  RMSE: 0.8312
-  MAE:  0.7724
+  R2:   0.3515
+  RMSE: 1.1389
+  MAE:  0.9513
 
---------------------------------------------------
+----------------------------------------------------------------------
 INTERPRETATION
---------------------------------------------------
-Model Quality: POOR (R2 = 0.0000)
-The model explains 0.0% of variance in PeopleRescued.
-Average prediction error: +/- 0.772 people
+----------------------------------------------------------------------
+Model Quality: POOR (Test R2 = 0.3515)
+The model explains 35.1% of variance in PeopleRescued.
+Average prediction error: +/- 0.951 people
+WARNING: Train R2 (0.9999) >> Test R2 (0.3515). Model is overfitting.

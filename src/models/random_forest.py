@@ -212,6 +212,16 @@ def run_random_forest_experiment(
         train_metrics["precision"] = precision_score(y_train, y_train_pred, average=avg, zero_division=0)
         train_metrics["recall"] = recall_score(y_train, y_train_pred, average=avg, zero_division=0)
         train_metrics["f1"] = f1_score(y_train, y_train_pred, average=avg, zero_division=0)
+        # Train ROC-AUC
+        try:
+            if hasattr(best_estimator.named_steps["model"], "predict_proba"):
+                y_train_proba = best_estimator.predict_proba(X_train)
+                if n_classes == 2:
+                    train_metrics["roc_auc"] = roc_auc_score(y_train, y_train_proba[:, 1])
+                else:
+                    train_metrics["roc_auc"] = roc_auc_score(y_train, y_train_proba, multi_class="ovr")
+        except Exception:
+            train_metrics["roc_auc"] = None
     else:
         train_mse = mean_squared_error(y_train, y_train_pred)
         train_rmse = np.sqrt(train_mse)
@@ -311,6 +321,9 @@ def run_random_forest_experiment(
         "cv_train_score": float(cv_train_score),  # mean train score for best params
         "cv_val_score": float(cv_val_score),      # mean val score for best params
         "grid_search": grid_search,
+
+        # Train metrics (for overfitting detection)
+        "train_metrics": train_metrics,
 
         # Test metrics & outputs
         "test_metrics": test_metrics,

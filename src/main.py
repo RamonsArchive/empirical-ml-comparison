@@ -35,10 +35,10 @@ def main():
     # print("=" * 80)
     # wine_main()
 
-    # print("\n" + "=" * 80)
-    # print("RUNNING RESCUE EXPERIMENT (REGRESSION)")
-    # print("=" * 80)
-    # rescue_main()
+    print("\n" + "=" * 80)
+    print("RUNNING RESCUE EXPERIMENT (REGRESSION)")
+    print("=" * 80)
+    rescue_main()
 
     print("\n" + "=" * 80)
     print("RUNNING RESCUE CLASSIFICATION EXPERIMENT")
