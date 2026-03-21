@@ -2,6 +2,8 @@
 *.jpg
 # *.jpeg
 *.png
+# Allow piano_plots images
+!plots/piano_plots/**/*.png
 *.gif
 *.bmp
 *.tiff
